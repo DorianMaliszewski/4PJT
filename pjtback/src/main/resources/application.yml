@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/pjtback?serverTimezone=UTC
+    password:
+    username: root
+    driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+
+  flyway:
+    user: root
+    schemas: pjtback
+    password:
+    enabled: false
