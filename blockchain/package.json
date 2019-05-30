@@ -6,14 +6,15 @@
     "start": "npm run prod",
     "server": "babel-node ./src/main.js",
     "server:prod": "node ./dist/main.js",
-    "dev": "NODE_ENV=development npm-run-all server",
+    "dev": "npm-run-all server",
     "clean": "rimraf dist",
     "build": "babel ./src --out-dir dist",
-    "prod": "NODE_ENV=production npm-run-all clean build server:prod",
+    "prod": "npm-run-all clean build server:prod",
     "watch": "nodemon"
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "babel-upgrade": "^1.0.1",
     "body-parser": "^1.19.0",
     "cross-env": "^5.2.0",
     "crypto-js": "^3.1.6",
@@ -39,8 +40,7 @@
     "@types/lodash": "^4.14.132",
     "@types/node": "^8.10.48",
     "@types/ws": "^3.2.1",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
+    "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.6",
     "babel-preset-es2015": "^6.24.1",
     "nodemon": "^1.19.1"

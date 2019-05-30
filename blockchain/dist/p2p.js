@@ -32,13 +32,11 @@ var initP2PServer = function initP2PServer(p2pPort) {
 };
 
 exports.initP2PServer = initP2PServer;
-exports.initP2PServer = initP2PServer;
 
 var getSockets = function getSockets() {
   return sockets;
 };
 
-exports.getSockets = getSockets;
 exports.getSockets = getSockets;
 
 var initConnection = function initConnection(ws) {

@@ -9,7 +9,7 @@ var _elliptic = require("elliptic");
 
 var _fs = require("fs");
 
-var _ = _interopRequireWildcard(require("lodash"));
+var _lodash = _interopRequireDefault(require("lodash"));
 
 var _transaction = require("./transaction");
 
@@ -22,8 +22,6 @@ var _TxOut = _interopRequireDefault(require("./models/TxOut"));
 var _Transaction = _interopRequireDefault(require("./models/Transaction"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 var EC = new _elliptic.ec('secp256k1');
 var privateKeyLocation = process.env.PRIVATE_KEY || 'node/wallet/private_key';
@@ -78,7 +76,7 @@ var deleteWallet = function deleteWallet() {
 exports.deleteWallet = deleteWallet;
 
 var getBalance = function getBalance(address, unspentTxOuts) {
-  return _(findUnspentTxOuts(address, unspentTxOuts)).map(function (uTxO) {
+  return (0, _lodash["default"])(findUnspentTxOuts(address, unspentTxOuts)).map(function (uTxO) {
     return uTxO.amount;
   }).sum();
 };
@@ -92,7 +90,7 @@ var getBalance = function getBalance(address, unspentTxOuts) {
 exports.getBalance = getBalance;
 
 var findUnspentTxOuts = function findUnspentTxOuts(ownerAddress, unspentTxOuts) {
-  return _.filter(unspentTxOuts, function (uTxO) {
+  return _lodash["default"].filter(unspentTxOuts, function (uTxO) {
     return uTxO.address === ownerAddress;
   });
 };
@@ -151,10 +149,9 @@ var createTxOuts = function createTxOuts(receiverAddress, myAddress, amount, lef
 };
 
 var filterTxPoolTxs = function filterTxPoolTxs(unspentTxOuts, transactionPool) {
-  var txIns = _(transactionPool).map(function (tx) {
+  var txIns = (0, _lodash["default"])(transactionPool).map(function (tx) {
     return tx.txIns;
   }).flatten().value();
-
   var removable = [];
   var _iteratorNormalCompletion2 = true;
   var _didIteratorError2 = false;
@@ -164,7 +161,7 @@ var filterTxPoolTxs = function filterTxPoolTxs(unspentTxOuts, transactionPool) {
     var _loop = function _loop() {
       var unspentTxOut = _step2.value;
 
-      var txIn = _.find(txIns, function (aTxIn) {
+      var txIn = _lodash["default"].find(txIns, function (aTxIn) {
         return aTxIn.txOutIndex === unspentTxOut.txOutIndex && aTxIn.txOutId === unspentTxOut.txOutId;
       });
 
@@ -191,7 +188,7 @@ var filterTxPoolTxs = function filterTxPoolTxs(unspentTxOuts, transactionPool) {
     }
   }
 
-  return _.without.apply(_, [unspentTxOuts].concat(removable));
+  return _lodash["default"].without.apply(_lodash["default"], [unspentTxOuts].concat(removable));
 };
 
 var createTransaction = function createTransaction(receiverAddress, amount, privateKey, unspentTxOuts, txPool) {
