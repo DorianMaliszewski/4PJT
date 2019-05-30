@@ -1,0 +1,170 @@
+<app-menu></app-menu>
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <section>
+        <h4>Bienvenue sur le POC de SUPBANK</h4>
+        <article>
+          <h6>Objectif</h6>
+          <p>
+            SupBank a décidé de créer son propre système de stockage et
+            transmettre des informations de transaction bancaire. Ce nouveau
+            système doit avoir les caractéristiques suivantes :
+          </p>
+          <ul>
+            <li>Fils instantanés (presque)</li>
+            <li>Devises sans frais</li>
+            <li>décentralisé</li>
+            <li>Inviolable et sécurisé</li>
+            <li>Transition transparente pour les utilisateurs</li>
+            <li>Historique complet des transactions</li>
+          </ul>
+        </article>
+        <article>
+          <h6>La blockchain ?</h6>
+          <p>
+            La blockchain est un systeme de c La blockchain est un systeme de
+            cLa blockchain est un systeme de cLa blockchain est un systeme de
+            cLa blockchain est un systeme de c
+          </p>
+        </article>
+      </section>
+    </div>
+    <div id="divHome" class="col">
+      <h4>Représentation interactive des noeuds</h4>
+      <ngx-graph
+        layout="colaForceDirected"
+        [links]="[
+          {
+            id: 'a',
+            source: 'first',
+            target: 'second',
+            label: 'is parent of'
+          },
+          {
+            id: 'b',
+            source: 'first',
+            target: 'c1',
+            label: 'custom label'
+          },
+          {
+            id: 'd',
+            source: 'first',
+            target: 'c2',
+            label: 'custom label'
+          },
+          {
+            id: 'e',
+            source: 'c1',
+            target: 'd',
+            label: 'first link'
+          },
+          {
+            id: 'f',
+            source: 'c1',
+            target: 'c2',
+            label: 'second link'
+          }
+        ]"
+        [nodes]="[
+          {
+            id: 'first',
+            label: 'A',
+            date: '01 / 01 / 2018',
+            ipAddress: '135.52.95.77',
+            idBlock: '4dthxfdthxfthxfthftd3fg6',
+            balance: '485'
+          },
+          {
+            id: 'second',
+            label: 'B',
+            date: '01 / 01 / 2017',
+            ipAddress: '135.52.95.76',
+            idBlock: 'st89h65t6h84xth8thfgh',
+            balance: '245'
+          },
+          {
+            id: 'c1',
+            label: 'C1',
+            date: '01 / 01 / 2016',
+            ipAddress: '135.52.95.72',
+            idBlock: '89065srtf3d8965fdfrgfhff',
+            balance: '485'
+          },
+          {
+            id: 'c2',
+            label: 'C2',
+            date: '01 / 01 / 2015',
+            ipAddress: '135.52.95.74',
+            idBlock: 'gd98f65gd68fg5xdf68gb5dfgxdf',
+            balance: '936'
+          },
+          {
+            id: 'd',
+            label: 'D',
+            date: '01 / 01 / 2019',
+            ipAddress: '135.52.95.78',
+            idBlock: '4851d3tg684x35dfg685d3fg6',
+            balance: '052'
+          }
+        ]"
+        [clusters]="[
+          {
+            id: 'third',
+            label: 'Serveur redondant',
+            childNodeIds: ['c1', 'c2']
+          }
+        ]"
+      >
+        <ng-template #nodeTemplate let-node>
+          <svg:g class="node" ngx-tooltip>
+            <svg:rect
+              (click)="test(node)"
+              [attr.width]="node.dimension.width"
+              [attr.height]="node.dimension.height"
+              [attr.fill]="node.data.color"
+            />
+            <svg:text
+              alignment-baseline="central"
+              [attr.x]="10"
+              [attr.y]="node.dimension.height / 2"
+            >
+              {{ node.label }}
+            </svg:text>
+          </svg:g>
+        </ng-template>
+      </ngx-graph>
+    </div>
+  </div>
+</div>
+
+<mat-horizontal-stepper labelPosition="bottom" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <ng-template matStepLabel>Informations</ng-template>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <p>Date d'entrée : {{ entryDate }}</p>
+          <p>Adresse IP : {{ ipAddress }}</p>
+        </div>
+        <div class="col">
+          <p>Identifiant du noeud : {{ idBlock }}</p>
+          <p>Balance : {{ balance }}</p>
+        </div>
+      </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup">
+    <ng-template matStepLabel>Liste de transaction</ng-template>
+    <app-historique></app-historique>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="mapFormGroup">
+    <ng-template matStepLabel>Position sur Map</ng-template>
+    <app-map></app-map>
+  </mat-step>
+</mat-horizontal-stepper>

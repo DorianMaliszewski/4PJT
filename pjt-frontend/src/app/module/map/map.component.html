@@ -1,0 +1,12 @@
+<!--<app-menu>-->
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="50.678418" [longitude]="7.809007"></agm-marker>
+  <agm-marker [latitude]="58.678418" [longitude]="7.809007"></agm-marker>
+  <agm-marker [latitude]="51.678418" [longitude]="7.809007"></agm-marker>
+</agm-map>
+
+<!--</app-menu>-->
