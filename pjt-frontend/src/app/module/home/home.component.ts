@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Node, Edge, ClusterNode } from "@swimlane/ngx-graph";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { BlockchainService } from "src/app/shared/blockchain.service";
 
 @Component({
   selector: "app-home",
@@ -18,7 +19,10 @@ export class HomeComponent implements OnInit {
   balance: number;
 
   // tslint:disable-next-line: variable-name
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(
+    private _formBuilder: FormBuilder,
+    private blockchainService: BlockchainService
+  ) {}
 
   ngOnInit() {
     /*=this.firstFormGroup = this._formBuilder.group({
@@ -34,5 +38,9 @@ export class HomeComponent implements OnInit {
     this.ipAddress = node.ipAddress;
     this.idBlock = node.idBlock;
     this.balance = node.balance;
+    this.blockchainService.getBlockchain();
+    this.blockchainService.getBalance();
+    this.blockchainService.getPeers();
+    this.blockchainService.getTransaction();
   }
 }
