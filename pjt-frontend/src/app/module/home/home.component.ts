@@ -10,13 +10,10 @@ import { BlockchainService } from "src/app/shared/blockchain.service";
 })
 export class HomeComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  transactionFormGroup: FormGroup;
   mapFormGroup: FormGroup;
-  entryDate: string;
-  idBlock: number;
+  blockFormGroup: FormGroup;
   ipAddress: string;
-  balance: number;
   node = [];
 
   // tslint:disable-next-line: variable-name
@@ -25,26 +22,9 @@ export class HomeComponent implements OnInit {
     private blockchainService: BlockchainService
   ) {}
 
-  ngOnInit() {
-    /*=this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ["", Validators.required]
-    });*/
+  ngOnInit() {}
 
-    this.node = this.blockchainService.getPeers();
-
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ["", Validators.required]
-    });
-  }
-
-  test(node) {
-    this.entryDate = node.date;
-    this.ipAddress = node.ipAddress;
-    this.idBlock = node.idBlock;
-    this.balance = node.balance;
-    this.blockchainService.getBlockchain();
-    this.blockchainService.getBalance();
-    this.blockchainService.getPeers();
-    this.blockchainService.getTransaction();
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
   }
 }
