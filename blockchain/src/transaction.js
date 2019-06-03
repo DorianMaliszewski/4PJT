@@ -9,14 +9,14 @@ import TxOut from './models/TxOut';
 import UnspentTxOut from './models/UnspentTxOut';
 
 // Base Wallet
-const COINBASE_AMOUNT = 50;
+const COINBASE_AMOUNT = 10;
 const ec = new ecdsa.ec('secp256k1');
 
 /**
  * Return the representation id of the transaction encrypted in SHA256
  * @param {Transaction} transaction
  */
-const getTransactionId = transaction => {
+export const getTransactionId = transaction => {
   const txInContent = transaction.txIns.map(txIn => txIn.txOutId + txIn.txOutIndex).reduce((a, b) => a + b, '');
   const txOutContent = transaction.txOuts.map(txOut => txOut.address + txOut.amount).reduce((a, b) => a + b, '');
   return CryptoJS.SHA256(txInContent + txOutContent).toString();
@@ -27,7 +27,7 @@ const getTransactionId = transaction => {
  * @param {Transaction} transaction The transaction to validate
  * @param {UnspentTxOut} aUnspentTxOuts The unspent transaction outputs to validate
  */
-const validateTransaction = (transaction, aUnspentTxOuts) => {
+export const validateTransaction = (transaction, aUnspentTxOuts) => {
   if (!isValidTransactionStructure(transaction)) {
     console.log('Invalid transaction structure in : ' + transaction.id);
     return false;
@@ -58,7 +58,7 @@ const validateTransaction = (transaction, aUnspentTxOuts) => {
  * @param {[UnspentTxOut]} aUnspentTxOuts Transaction outputs to validate
  * @param {number} blockIndex The index of the block to validate
  */
-const validateBlockTransactions = (aTransactions, aUnspentTxOuts, blockIndex) => {
+export const validateBlockTransactions = (aTransactions, aUnspentTxOuts, blockIndex) => {
   const coinbaseTx = aTransactions[0];
   if (!validateCoinbaseTx(coinbaseTx, blockIndex)) {
     console.log('Invalid coinbase transaction: ' + JSON.stringify(coinbaseTx));

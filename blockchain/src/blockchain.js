@@ -157,24 +157,23 @@ const findBlock = (index, previousHash, timestamp, data, difficulty) => {
     nonce++;
   }
 };
-const getAccountBalance = () => {
+export const getAccountBalance = () => {
   return wallet.getBalance(wallet.getPublicFromWallet(), getUnspentTxOuts());
 };
-exports.getAccountBalance = getAccountBalance;
-const sendTransaction = (address, amount) => {
+export const sendTransaction = (address, amount) => {
   const tx = wallet.createTransaction(address, amount, wallet.getPrivateFromWallet(), getUnspentTxOuts(), transactionPool.getTransactionPool());
   transactionPool.addToTransactionPool(tx, getUnspentTxOuts());
   p2p.broadCastTransactionPool();
   return tx;
 };
-exports.sendTransaction = sendTransaction;
-const calculateHashForBlock = block => calculateHash(block.index, block.previousHash, block.timestamp, block.data, block.difficulty, block.nonce);
-const calculateHash = (index, previousHash, timestamp, data, difficulty, nonce) => CryptoJS.SHA256(index + previousHash + timestamp + data + difficulty + nonce).toString();
-const isValidBlockStructure = block => {
+
+export const calculateHashForBlock = block => calculateHash(block.index, block.previousHash, block.timestamp, block.data, block.difficulty, block.nonce);
+export const calculateHash = (index, previousHash, timestamp, data, difficulty, nonce) => CryptoJS.SHA256(index + previousHash + timestamp + data + difficulty + nonce).toString();
+export const isValidBlockStructure = block => {
   return typeof block.index === 'number' && typeof block.hash === 'string' && typeof block.previousHash === 'string' && typeof block.timestamp === 'number' && typeof block.data === 'object';
 };
-exports.isValidBlockStructure = isValidBlockStructure;
-const isValidNewBlock = (newBlock, previousBlock) => {
+
+export const isValidNewBlock = (newBlock, previousBlock) => {
   if (!isValidBlockStructure(newBlock)) {
     console.log('invalid block structure: %s', JSON.stringify(newBlock));
     return false;
@@ -251,7 +250,7 @@ const isValidChain = blockchainToValidate => {
   }
   return aUnspentTxOuts;
 };
-const addBlockToChain = newBlock => {
+export const addBlockToChain = newBlock => {
   if (isValidNewBlock(newBlock, getLatestBlock())) {
     const retVal = transaction.processTransactions(newBlock.data, getUnspentTxOuts(), newBlock.index);
     if (retVal === null) {
@@ -266,8 +265,8 @@ const addBlockToChain = newBlock => {
   }
   return false;
 };
-exports.addBlockToChain = addBlockToChain;
-const replaceChain = newBlocks => {
+
+export const replaceChain = newBlocks => {
   const aUnspentTxOuts = isValidChain(newBlocks);
   const validChain = aUnspentTxOuts !== null;
   if (validChain && getAccumulatedDifficulty(newBlocks) > getAccumulatedDifficulty(getBlockchain())) {
@@ -280,9 +279,7 @@ const replaceChain = newBlocks => {
     console.log('Received blockchain invalid');
   }
 };
-exports.replaceChain = replaceChain;
-const handleReceivedTransaction = transaction => {
+
+export const handleReceivedTransaction = transaction => {
   transactionPool.addToTransactionPool(transaction, getUnspentTxOuts());
 };
-exports.handleReceivedTransaction = handleReceivedTransaction;
-//# sourceMappingURL=blockchain.js.map

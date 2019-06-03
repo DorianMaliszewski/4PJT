@@ -5,12 +5,21 @@ import * as blockchain from './blockchain';
 import * as p2p from './p2p';
 import * as transactionPool from './transactionPool';
 import * as wallet from './wallet';
+import cors from 'cors';
 
 const httpPort = parseInt(process.env.HTTP_PORT) || 3001;
 const p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 
 const initHttpServer = myHttpPort => {
   const app = express();
+
+  app.use(
+    cors({
+      origin: '*',
+      optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+    })
+  );
+
   app.use(bodyParser.json());
   app.use((err, req, res, next) => {
     if (err) {

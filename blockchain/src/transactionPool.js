@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { validateTransaction } from './transaction';
 
 import Transaction from './models/Transaction';
