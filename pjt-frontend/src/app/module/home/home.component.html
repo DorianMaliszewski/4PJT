@@ -67,55 +67,7 @@
             label: 'second link'
           }
         ]"
-        [nodes]="[
-          {
-            id: 'first',
-            label: 'A',
-            date: '01 / 01 / 2018',
-            ipAddress: '135.52.95.77',
-            idBlock: '4dthxfdthxfthxfthftd3fg6',
-            balance: '485'
-          },
-          {
-            id: 'second',
-            label: 'B',
-            date: '01 / 01 / 2017',
-            ipAddress: '135.52.95.76',
-            idBlock: 'st89h65t6h84xth8thfgh',
-            balance: '245'
-          },
-          {
-            id: 'c1',
-            label: 'C1',
-            date: '01 / 01 / 2016',
-            ipAddress: '135.52.95.72',
-            idBlock: '89065srtf3d8965fdfrgfhff',
-            balance: '485'
-          },
-          {
-            id: 'c2',
-            label: 'C2',
-            date: '01 / 01 / 2015',
-            ipAddress: '135.52.95.74',
-            idBlock: 'gd98f65gd68fg5xdf68gb5dfgxdf',
-            balance: '936'
-          },
-          {
-            id: 'd',
-            label: 'D',
-            date: '01 / 01 / 2019',
-            ipAddress: '135.52.95.78',
-            idBlock: '4851d3tg684x35dfg685d3fg6',
-            balance: '052'
-          }
-        ]"
-        [clusters]="[
-          {
-            id: 'third',
-            label: 'Serveur redondant',
-            childNodeIds: ['c1', 'c2']
-          }
-        ]"
+        [nodes]="node"
       >
         <ng-template #nodeTemplate let-node>
           <svg:g class="node" ngx-tooltip>
@@ -168,3 +120,54 @@
     <app-map></app-map>
   </mat-step>
 </mat-horizontal-stepper>
+<!--
+  [
+          {
+            id: 'first',
+            label: 'A',
+            date: '01 / 01 / 2018',
+            ipAddress: '135.52.95.77',
+            idBlock: '4dthxfdthxfthxfthftd3fg6',
+            balance: '485'
+          },
+          {
+            id: 'second',
+            label: 'B',
+            date: '01 / 01 / 2017',
+            ipAddress: '135.52.95.76',
+            idBlock: 'st89h65t6h84xth8thfgh',
+            balance: '245'
+          },
+          {
+            id: 'c1',
+            label: 'C1',
+            date: '01 / 01 / 2016',
+            ipAddress: '135.52.95.72',
+            idBlock: '89065srtf3d8965fdfrgfhff',
+            balance: '485'
+          },
+          {
+            id: 'c2',
+            label: 'C2',
+            date: '01 / 01 / 2015',
+            ipAddress: '135.52.95.74',
+            idBlock: 'gd98f65gd68fg5xdf68gb5dfgxdf',
+            balance: '936'
+          },
+          {
+            id: 'd',
+            label: 'D',
+            date: '01 / 01 / 2019',
+            ipAddress: '135.52.95.78',
+            idBlock: '4851d3tg684x35dfg685d3fg6',
+            balance: '052'
+          }
+        ]"
+        [clusters]="[
+          {
+            id: 'third',
+            label: 'Serveur redondant',
+            childNodeIds: ['c1', 'c2']
+          }
+        ]
+-->

@@ -31,10 +31,11 @@ export class BlockchainService {
     );
   }
 
-  getPeers() {
+  getPeers(): any {
     this.getResource("/api/peers").subscribe(
       response => {
         console.log("peer : " + response);
+        return response;
       },
       error => {
         console.log(error);

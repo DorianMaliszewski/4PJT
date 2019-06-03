@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   idBlock: number;
   ipAddress: string;
   balance: number;
+  node = [];
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -28,6 +29,9 @@ export class HomeComponent implements OnInit {
     /*=this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ["", Validators.required]
     });*/
+
+    this.node = this.blockchainService.getPeers();
+
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ["", Validators.required]
     });
