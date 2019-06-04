@@ -1,0 +1,31 @@
+<div class="container" id="contBlock" *ngFor="let block of blocks">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Block N°{{ block.index }}</h4>
+      </div>
+      <div class="card-body">
+        <ul class="list-unstyled mt-3 mb-4" style="    text-align: left;">
+          <li>
+            <strong>Date: </strong>{{ block.timestamp | date: "dd/MM/yyyy" }}
+          </li>
+          <li><strong>Id:</strong> {{ block.hash }}</li>
+          <li><strong>Difficulty:</strong> {{ block.difficulty }}</li>
+        </ul>
+        <button type="button" class="btn btn-lg btn-block btn-primary">
+          Détails
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="blocks?.length == 0">
+  <div class="card-deck mb-3 text-center">
+    <div class="card mb-4 box-shadow">
+      <div class="card-header">
+        <h4 class="my-0 font-weight-normal">Aucun block trouvé</h4>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.updateTransactionPool = exports.addToTransactionPool = exports.getTransactionPool = void 0;
 
-var _ = _interopRequireWildcard(require("lodash"));
+var _lodash = _interopRequireDefault(require("lodash"));
 
 var _transaction = require("./transaction");
 
@@ -17,12 +17,10 @@ var _UnspentTxOut = _interopRequireDefault(require("./models/UnspentTxOut"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
-
 var transactionPool = [];
 
 var getTransactionPool = function getTransactionPool() {
-  return _.cloneDeep(transactionPool);
+  return _lodash["default"].cloneDeep(transactionPool);
 };
 /**
  *
@@ -102,7 +100,7 @@ var updateTransactionPool = function updateTransactionPool(unspentTxOuts) {
 
   if (invalidTxs.length > 0) {
     console.log('removing the following transactions from txPool: %s', JSON.stringify(invalidTxs));
-    transactionPool = _.without.apply(_, [transactionPool].concat(invalidTxs));
+    transactionPool = _lodash["default"].without.apply(_lodash["default"], [transactionPool].concat(invalidTxs));
   }
 };
 /**
@@ -114,7 +112,7 @@ var updateTransactionPool = function updateTransactionPool(unspentTxOuts) {
 exports.updateTransactionPool = updateTransactionPool;
 
 var getTxPoolIns = function getTxPoolIns(aTransactionPool) {
-  return _(aTransactionPool).map(function (tx) {
+  return (0, _lodash["default"])(aTransactionPool).map(function (tx) {
     return tx.txIns;
   }).flatten().value();
 };
@@ -134,7 +132,7 @@ var isValidTxForPool = function isValidTxForPool(tx, aTtransactionPool) {
    */
 
   var containsTxIn = function containsTxIn(txIns, txIn) {
-    return _.find(txPoolIns, function (txPoolIn) {
+    return _lodash["default"].find(txPoolIns, function (txPoolIn) {
       return txIn.txOutIndex === txPoolIn.txOutIndex && txIn.txOutId === txPoolIn.txOutId;
     });
   };

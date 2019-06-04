@@ -1,12 +1,19 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class BlockchainService {
+  blocksSubject = new Subject<any[]>();
+  private blocks = [];
+
   constructor(private httpClient: HttpClient) {}
+
+  emitBlocksSubject() {
+    this.blocksSubject.next(this.blocks.slice());
+  }
 
   public getResource(resourceUrl): Observable<any> {
     const user = localStorage.getItem("currentUser");
@@ -21,14 +28,18 @@ export class BlockchainService {
   }
 
   getBlockchain() {
-    this.getResource("/api/blocks").subscribe(
-      response => {
-        console.log("block : " + response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getResource("/api/blocks")
+      .toPromise()
+      .then(
+        response => {
+          this.blocks = response;
+          console.log(this.blocks);
+          this.emitBlocksSubject();
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   getPeers(): any {

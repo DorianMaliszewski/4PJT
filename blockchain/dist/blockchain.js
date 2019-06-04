@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generatenextBlockWithTransaction = exports.generateNextBlock = exports.getMyUnspentTransactionOutputs = exports.generateRawNextBlock = exports.getLatestBlock = exports.setUnspentTxOuts = exports.getUnspentTxOuts = exports.getBlockchain = void 0;
+exports.handleReceivedTransaction = exports.replaceChain = exports.addBlockToChain = exports.isValidNewBlock = exports.isValidBlockStructure = exports.calculateHash = exports.calculateHashForBlock = exports.sendTransaction = exports.getAccountBalance = exports.generatenextBlockWithTransaction = exports.generateNextBlock = exports.getMyUnspentTransactionOutputs = exports.generateRawNextBlock = exports.getLatestBlock = exports.setUnspentTxOuts = exports.getUnspentTxOuts = exports.getBlockchain = void 0;
 
 var _Block = _interopRequireDefault(require("./models/Block"));
 
@@ -238,9 +238,13 @@ var calculateHashForBlock = function calculateHashForBlock(block) {
   return calculateHash(block.index, block.previousHash, block.timestamp, block.data, block.difficulty, block.nonce);
 };
 
+exports.calculateHashForBlock = calculateHashForBlock;
+
 var calculateHash = function calculateHash(index, previousHash, timestamp, data, difficulty, nonce) {
   return _cryptoJs["default"].SHA256(index + previousHash + timestamp + data + difficulty + nonce).toString();
 };
+
+exports.calculateHash = calculateHash;
 
 var isValidBlockStructure = function isValidBlockStructure(block) {
   return typeof block.index === 'number' && typeof block.hash === 'string' && typeof block.previousHash === 'string' && typeof block.timestamp === 'number' && _typeof(block.data) === 'object';
@@ -269,6 +273,8 @@ var isValidNewBlock = function isValidNewBlock(newBlock, previousBlock) {
 
   return true;
 };
+
+exports.isValidNewBlock = isValidNewBlock;
 
 var getAccumulatedDifficulty = function getAccumulatedDifficulty(aBlockchain) {
   return aBlockchain.map(function (block) {
