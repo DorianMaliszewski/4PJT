@@ -55,6 +55,6 @@ public class BlockchainController {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.getForObject("http://localhost:3001/address/"+address,String.class);
         return new ResponseEntity<String>(response,HttpStatus.OK);
-    }
+    } 
 
 }
