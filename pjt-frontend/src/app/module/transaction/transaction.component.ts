@@ -15,6 +15,9 @@ export class TransactionComponent implements OnInit {
   blocks = [];
   blockSubscription: Subscription;
 
+  searchResult = [];
+  searchValue: string = "";
+
   constructor(private blockchainService: BlockchainService) {}
 
   ngOnInit() {
@@ -27,6 +30,21 @@ export class TransactionComponent implements OnInit {
       // this.getAllAddress();
       this.getAllTransactions();
     }, 1000);
+  }
+
+  onSearchChange(searchValue: string) {
+    this.searchValue = searchValue;
+    var result = [];
+    console.log(searchValue);
+    this.transactions.forEach(element => {
+      if (
+        element.recipient.includes(searchValue) ||
+        element.sender.includes(searchValue)
+      ) {
+        result.push(element);
+      }
+    });
+    this.searchResult = result;
   }
   /*
   getAllAddress() {
