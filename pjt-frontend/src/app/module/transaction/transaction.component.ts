@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { BlockchainService } from "src/app/shared/blockchain.service";
 import { Subscription } from "rxjs";
 import { MatTableDataSource } from "@angular/material";
+import { Transaction } from "src/app/model/transaction.model";
 
 @Component({
   selector: "app-transaction",
@@ -9,7 +10,7 @@ import { MatTableDataSource } from "@angular/material";
   styleUrls: ["./transaction.component.scss"]
 })
 export class TransactionComponent implements OnInit {
-  transactions = [];
+  transactions = Array<Transaction>();
   addresses = [];
   blocks = [];
   blockSubscription: Subscription;
@@ -23,11 +24,12 @@ export class TransactionComponent implements OnInit {
       }
     );
     setTimeout(() => {
-      this.getAllAddress();
-    }, 2000);
+      // this.getAllAddress();
+      this.getAllTransactions();
+    }, 1000);
   }
-
-  async getAllAddress() {
+  /*
+  getAllAddress() {
     // tslint:disable-next-line: prefer-for-of
     for (let i = 0; i < this.blocks.length; i++) {
       // tslint:disable-next-line: prefer-for-of
@@ -58,6 +60,33 @@ export class TransactionComponent implements OnInit {
                 }
               );
           }
+        }
+      }
+    }
+  }*/
+
+  getAllTransactions() {
+    let transas = Array<Transaction>();
+    //list des blocks
+    for (let i = 0; i < this.blocks.length; i++) {
+      const trans = new Transaction();
+      // tslint:disable-next-line: prefer-for-of
+      //list de data
+      for (let j = 0; j < this.blocks[i].data.length; j++) {
+        // tslint:disable-next-line: prefer-for-of
+        for (let h = 0; h < this.blocks[i].data[j].txOuts.length; h++) {
+          if (this.blocks[i].data[j].txIns[0].txOutId === "") {
+            trans.sender = "recompense minage";
+          } else {
+            trans.sender = this.blocks[i].data[j].txIns[0].txOutId;
+          }
+
+          trans.recipient = this.blocks[i].data[j].txOuts[h].address;
+          trans.montant = this.blocks[i].data[j].txOuts[h].amount;
+          transas.push(trans);
+          console.log(transas);
+          this.transactions = transas;
+          console.log(this.transactions);
         }
       }
     }

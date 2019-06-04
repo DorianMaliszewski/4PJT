@@ -1,7 +1,12 @@
 {
-    "/api/*": {
-        "target": "http://localhost:8080",
-        "secure": false,
-        "pathRewrite": {"^/api" : ""}
-    }
+  "/api/*": {
+    "target": "http://localhost:8080",
+    "secure": false,
+    "pathRewrite": { "^/api": "" }
+  },
+  "/map/*": {
+    "target": "https://extreme-ip-lookup.com/",
+    "secure": false,
+    "pathRewrite": { "^/map": "" }
+  }
 }

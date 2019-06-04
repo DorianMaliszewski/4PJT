@@ -1,13 +1,17 @@
-<div class="container" id="contBlock" *ngFor="let transaction of transactions">
+<div
+  class="container"
+  id="contBlock"
+  *ngFor="let transaction of transactions; let i = index"
+>
   <div class="card-deck mb-3 text-center">
     <div class="card mb-4 box-shadow">
       <div class="card-body">
         <div class="card-header">
-          <h4 class="my-0 font-weight-normal">{{ transaction.amount }} $</h4>
+          <h4 class="my-0 font-weight-normal">{{ transaction.montant }} $</h4>
         </div>
-        <ul class="list-unstyled mt-3 mb-4" style="    text-align: left;">
-          <li><strong>De: </strong>{{ transaction.txOutsIndex }}</li>
-          <li><strong>A:</strong> {{ transaction.txOutId }}</li>
+        <ul class="list-unstyled mt-3 mb-4" style=" text-align: left;">
+          <li><strong>De: </strong>{{ transaction.sender }}</li>
+          <li><strong>A:</strong> {{ transaction.recipient }}</li>
         </ul>
       </div>
     </div>

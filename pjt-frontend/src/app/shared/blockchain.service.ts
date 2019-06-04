@@ -7,6 +7,7 @@ import { Observable, Subject } from "rxjs";
 })
 export class BlockchainService {
   blocksSubject = new Subject<any[]>();
+
   private blocks = [];
 
   constructor(private httpClient: HttpClient) {}
@@ -65,14 +66,5 @@ export class BlockchainService {
     );
   }
 
-  getTransaction() {
-    this.getResource("/api/transactions").subscribe(
-      response => {
-        console.log("trans : " + response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+  getTransactionByBlock(block: any) {}
 }
