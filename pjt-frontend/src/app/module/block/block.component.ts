@@ -13,13 +13,9 @@ export class BlockComponent implements OnInit {
   transactions = [];
   blockSubscription: Subscription;
   transactionsBlock = [];
-
+  searchResult = [];
+  searchValue: string = "";
   displayedColumns: string[] = ["sender", "recipient", "value"];
-  dataSource = new MatTableDataSource(this.transactionsBlock);
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
 
   constructor(private blockchainService: BlockchainService) {}
 
@@ -35,6 +31,19 @@ export class BlockComponent implements OnInit {
 
   details(block: any) {
     //getTransactionByAddress(this.blocks[block.index])
+  }
+
+  onSearchChange(searchValue: string) {
+    this.searchValue = searchValue;
+    var result = [];
+    console.log(searchValue);
+    this.blocks.forEach(element => {
+      var hash: string = element.hash;
+      if (hash.includes(searchValue)) {
+        result.push(element);
+      }
+    });
+    this.searchResult = result;
   }
 
   getAllTransactions() {}

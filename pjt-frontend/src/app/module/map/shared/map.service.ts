@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { BlockchainService } from "src/app/shared/blockchain.service";
+import { Coord } from "src/app/model/coord.model";
 
 @Injectable({
   providedIn: "root"
@@ -11,11 +12,14 @@ export class MapService {
     private blockchainService: BlockchainService
   ) {}
 
-  getCoords(ip: string): Coord {
+  getCoords(ip: string) {
     this.httpClient.get("https://extreme-ip-lookup.com/json/" + ip).subscribe(
       response => {
+        let coord = new Coord();
+        /*coord.lat = response.lat;
+        coord.lng = response.lon;*/
         console.log(response);
-        return (coord = new Coord(response.lat, response.lon));
+        //return new Coord(response.lat, response.lon);
       },
       error => {
         console.log(error);

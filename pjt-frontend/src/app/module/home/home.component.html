@@ -147,7 +147,8 @@
 
 <mat-horizontal-stepper
   labelPosition="bottom"
-  style="text-align: center;"
+  style="text-align: center;    margin: 5%;
+  background-color: gainsboro;"
   #stepper
 >
   <mat-step [stepControl]="blockFormGroup">
@@ -157,10 +158,6 @@
   <mat-step [stepControl]="transactionFormGroup">
     <ng-template matStepLabel>Liste des transactions</ng-template>
     <app-transaction></app-transaction>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
   </mat-step>
   <mat-step [stepControl]="mapFormGroup">
     <ng-template matStepLabel>Position sur Map</ng-template>

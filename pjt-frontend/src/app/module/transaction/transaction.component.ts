@@ -66,7 +66,6 @@ export class TransactionComponent implements OnInit {
   }*/
 
   getAllTransactions() {
-    let transas = Array<Transaction>();
     //list des blocks
     for (let i = 0; i < this.blocks.length; i++) {
       const trans = new Transaction();
@@ -83,10 +82,7 @@ export class TransactionComponent implements OnInit {
 
           trans.recipient = this.blocks[i].data[j].txOuts[h].address;
           trans.montant = this.blocks[i].data[j].txOuts[h].amount;
-          transas.push(trans);
-          console.log(transas);
-          this.transactions = transas;
-          console.log(this.transactions);
+          this.transactions.push(trans);
         }
       }
     }
