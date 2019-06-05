@@ -1,0 +1,8 @@
+{
+  "name": "BlockchainWallet",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular",
+  "id": "5bf4f421"
+}
