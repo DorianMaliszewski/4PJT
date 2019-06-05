@@ -29,6 +29,6 @@ export class MapComponent implements OnInit {
     /*this.ipaddress.forEach(element => {
       this.MapService.getCoords(element);
     });*/
-    this.MapService.getCoords("91.207.208.153");
+    //this.MapService.getCoords("91.207.208.153");
   }
 }

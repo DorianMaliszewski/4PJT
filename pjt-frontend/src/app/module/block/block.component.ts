@@ -45,6 +45,4 @@ export class BlockComponent implements OnInit {
     });
     this.searchResult = result;
   }
-
-  getAllTransactions() {}
 }
