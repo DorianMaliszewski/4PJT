@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7efee32d-2822-462b-82cd-d8226985f475" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/blokcchain/blokcchain.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blokcchain/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blokcchain/src/main/java/Application.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blokcchain/src/main/java/domains/Block.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/blokcchain/src/main/java/utils/StringUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/blokcchain/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,48 +15,18 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="341550994">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/blokcchain/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/Application.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/domains/Block.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/utils/StringUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -87,6 +53,12 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -94,30 +66,52 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/BlockchainWallet/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/BlockchainWallet/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-device/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-device/tests/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-ionic-keyboard/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-ionic-webview/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-splashscreen/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-splashscreen/tests/ios/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-splashscreen/tests/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-statusbar/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-statusbar/tests/package.json" />
+      <path value="$PROJECT_DIR$/BlockchainWallet/plugins/cordova-plugin-whitelist/package.json" />
+      <path value="$PROJECT_DIR$/blockchain/package.json" />
+      <path value="$PROJECT_DIR$/pjt-frontend/package.json" />
+      <path value="$PROJECT_DIR$/wallet/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="x" value="960" />
     <option name="y" value="30" />
     <option name="width" value="960" />
     <option name="height" value="1050" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="4PJT-github" type="b2602c69:ProjectViewProjectNode" />
-              <item name="4PJT-github" type="462c0819:PsiDirectoryNode" />
+              <item name="4PJT" type="b2602c69:ProjectViewProjectNode" />
+              <item name="4PJT" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -157,11 +151,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Application" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -175,16 +164,17 @@
       <updated>1558533697747</updated>
       <workItem from="1558533699056" duration="806000" />
       <workItem from="1558534534938" duration="13000" />
+      <workItem from="1559743288181" duration="205000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="819000" />
+    <option name="totallyTimeSpent" value="1024000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="30" width="960" height="1050" extended-state="0" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34581497" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.34981686" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -202,7 +192,7 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="10" visible="true" weight="0.32932165" />
-      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32932165" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -219,42 +209,18 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/blockchain/Block.java" />
     <entry file="file://$PROJECT_DIR$/blockchain/BlockchainServerRunnable.java" />
     <entry file="file://$PROJECT_DIR$/blockchain/BlockchainServer.java" />
     <entry file="file://$PROJECT_DIR$/blockchain/pom.xml" />
-    <entry file="file://$PROJECT_DIR$/blokcchain/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="68" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/domains/Block.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/utils/StringUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/blokcchain/pom.xml" />
+    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/Application.java" />
+    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/domains/Block.java" />
+    <entry file="file://$PROJECT_DIR$/blokcchain/src/main/java/utils/StringUtil.java" />
   </component>
   <component name="masterDetails">
     <states>
