@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7efee32d-2822-462b-82cd-d8226985f475" name="Default Changelist" comment="Final Mobile App" />
+    <list default="true" id="7efee32d-2822-462b-82cd-d8226985f475" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/blokcchain/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +172,7 @@
       <updated>1558533697747</updated>
       <workItem from="1558533699056" duration="806000" />
       <workItem from="1558534534938" duration="13000" />
-      <workItem from="1559743288181" duration="471000" />
+      <workItem from="1559743288181" duration="729000" />
     </task>
     <task id="LOCAL-00001" summary="Final Mobile App">
       <created>1559743690128</created>
@@ -181,11 +181,18 @@
       <option name="project" value="LOCAL" />
       <updated>1559743690128</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Final Mobile App">
+      <created>1559744054873</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1559744054873</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1290000" />
+    <option name="totallyTimeSpent" value="1548000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
