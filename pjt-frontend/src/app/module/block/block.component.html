@@ -14,42 +14,6 @@
 </div>
 <br />
 
-<mat-form-field *ngIf="transactionsBlock.length > 0">
-  <input
-    matInput
-    (keyup)="applyFilter($event.target.value)"
-    placeholder="Filter"
-  />
-</mat-form-field>
-
-<table
-  mat-table
-  [dataSource]="dataSource"
-  class="mat-elevation-z8"
-  *ngIf="transactionsBlock.length > 0"
->
-  <!-- Sender Column -->
-  <ng-container matColumnDef="sender">
-    <th mat-header-cell *matHeaderCellDef>Sender</th>
-    <td mat-cell *matCellDef="let transac">{{ transac.sender }}</td>
-  </ng-container>
-
-  <!-- recipient Column -->
-  <ng-container matColumnDef="recipient">
-    <th mat-header-cell *matHeaderCellDef>Recipient</th>
-    <td mat-cell *matCellDef="let transac">{{ transac.recipient }}</td>
-  </ng-container>
-
-  <!-- value Column -->
-  <ng-container matColumnDef="value">
-    <th mat-header-cell *matHeaderCellDef>Value</th>
-    <td mat-cell *matCellDef="let transac">{{ transac.value }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
-
 <div *ngIf="searchValue == ''">
   <div class="container" id="contBlock" *ngFor="let block of blocks">
     <div class="card-deck mb-3 text-center">
@@ -66,7 +30,11 @@
             <li><strong>Id:</strong> {{ block.hash }}</li>
             <li><strong>Difficulty:</strong> {{ block.difficulty }}</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">
+          <button
+            type="button"
+            class="btn btn-lg btn-block btn-primary"
+            (click)="details(block.index)"
+          >
             Détails
           </button>
         </div>

@@ -16,7 +16,7 @@ export class TransactionComponent implements OnInit {
   blockSubscription: Subscription;
 
   searchResult = [];
-  searchValue: string = "";
+  searchValue = "";
 
   constructor(private blockchainService: BlockchainService) {}
 
@@ -34,7 +34,7 @@ export class TransactionComponent implements OnInit {
 
   onSearchChange(searchValue: string) {
     this.searchValue = searchValue;
-    var result = [];
+    const result = [];
     console.log(searchValue);
     this.transactions.forEach(element => {
       if (
@@ -84,14 +84,15 @@ export class TransactionComponent implements OnInit {
   }*/
 
   getAllTransactions() {
-    //list des blocks
+    // list des blocks
     for (let i = 0; i < this.blocks.length; i++) {
-      const trans = new Transaction();
       // tslint:disable-next-line: prefer-for-of
-      //list de data
+      // list de data
       for (let j = 0; j < this.blocks[i].data.length; j++) {
         // tslint:disable-next-line: prefer-for-of
         for (let h = 0; h < this.blocks[i].data[j].txOuts.length; h++) {
+          const trans = new Transaction();
+
           if (this.blocks[i].data[j].txIns[0].txOutId === "") {
             trans.sender = "recompense minage";
           } else {

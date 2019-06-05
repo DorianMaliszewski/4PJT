@@ -35,8 +35,9 @@ import {
   FacebookLoginProvider
 } from "angular-6-social-login";
 import { NgxGraphModule } from "@swimlane/ngx-graph";
-import { BlockComponent } from './module/block/block.component';
-import { TransactionComponent } from './module/transaction/transaction.component';
+import { BlockComponent } from "./module/block/block.component";
+import { TransactionComponent } from "./module/transaction/transaction.component";
+import { DetailsBlockComponent } from "./module/details-block/details-block.component";
 
 export function getAuthServiceConfigs() {
   const config = new AuthServiceConfig([
@@ -76,6 +77,10 @@ const appRoutes: Routes = [
     component: MapComponent
   },
   {
+    path: "block-details/:id",
+    component: DetailsBlockComponent
+  },
+  {
     path: "not-found",
     component: NotFoundComponent
   },
@@ -95,7 +100,8 @@ const appRoutes: Routes = [
     MenuComponent,
     NotFoundComponent,
     BlockComponent,
-    TransactionComponent
+    TransactionComponent,
+    DetailsBlockComponent
   ],
   imports: [
     BrowserModule,

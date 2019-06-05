@@ -29,8 +29,8 @@ export class BlockComponent implements OnInit {
     this.blockchainService.getBlockchain();
   }
 
-  details(block: any) {
-    //getTransactionByAddress(this.blocks[block.index])
+  details(id: number) {
+    window.open("/block-details/" + id, "_blank");
   }
 
   onSearchChange(searchValue: string) {
