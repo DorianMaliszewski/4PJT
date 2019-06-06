@@ -6,7 +6,6 @@ import Home from './components/Home';
 import ConnectedSwitch from './components/Core/ConnectedSwitch';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
 import { deepPurple, blue } from '@material-ui/core/colors/';
-import MyTransactions from './components/MyTransactions';
 import AuthProvider from './providers/AuthProvider';
 import TransactionProvider from './providers/TransactionProvider';
 import Send from './components/Send';

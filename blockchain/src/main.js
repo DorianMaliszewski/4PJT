@@ -6,12 +6,16 @@ import * as p2p from './p2p';
 import * as transactionPool from './transactionPool';
 import * as wallet from './wallet';
 import cors from 'cors';
+import path from 'path';
 
 const httpPort = parseInt(process.env.HTTP_PORT) || 3001;
 const p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 
 const initHttpServer = myHttpPort => {
   const app = express();
+
+  // Serve the static files from the React app
+  app.use(express.static(path.join(__dirname, './build')));
 
   app.use(
     cors({
@@ -119,6 +123,11 @@ const initHttpServer = myHttpPort => {
   app.post('/stop', (req, res) => {
     res.send({ msg: 'stopping server' });
     process.exit();
+  });
+
+  // Handles any requests that don't match the ones above
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + './build/index.html'));
   });
 
   app.listen(myHttpPort, () => {
