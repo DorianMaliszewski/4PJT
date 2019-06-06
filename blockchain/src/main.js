@@ -15,7 +15,7 @@ const initHttpServer = myHttpPort => {
   const app = express();
 
   // Serve the static files from the React app
-  app.use(express.static(path.join(__dirname, './build')));
+  app.use(express.static(path.join(__dirname, '/build')));
 
   app.use(
     cors({
@@ -127,11 +127,7 @@ const initHttpServer = myHttpPort => {
 
   // Handles any requests that don't match the ones above
   app.get('*', (req, res) => {
-<<<<<<< HEAD
     res.sendFile(path.join(__dirname + '/build/index.html'));
-=======
-    res.sendFile(path.join(__dirname + './build/index.html'));
->>>>>>> 464355f8d3db998321ba1bbfcc2ad136eb58d183
   });
 
   app.listen(myHttpPort, () => {
