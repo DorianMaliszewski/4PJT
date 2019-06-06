@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
-import SignIn from "./components/SignIn";
-import Home from "./components/Home";
-import ConnectedSwitch from "./components/Core/ConnectedSwitch";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core";
-import { deepPurple, blue } from "@material-ui/core/colors/";
-import AuthContext from "./contexts/AuthContext";
-import MyTransactions from "./components/MyTransactions";
-import authProvider from "./providers/authProvider";
-import TransactionContext from "./contexts/TransactionContext";
-import transactionProvider from "./providers/transactionProvider";
-import Send from "./components/Send";
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
+import SignIn from './components/SignIn';
+import Home from './components/Home';
+import ConnectedSwitch from './components/Core/ConnectedSwitch';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core';
+import { deepPurple, blue } from '@material-ui/core/colors/';
+import MyTransactions from './components/MyTransactions';
+import AuthProvider from './providers/AuthProvider';
+import TransactionProvider from './providers/TransactionProvider';
+import Send from './components/Send';
+import Receive from './components/Receive';
+import Buy from './components/Buy';
 
 const theme = createMuiTheme({
   palette: {
@@ -28,19 +28,20 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <Router>
-          <AuthContext.Provider value={authProvider}>
-            <TransactionContext.Provider value={transactionProvider}>
+          <AuthProvider>
+            <TransactionProvider>
               <Switch>
-                <Route path='/login' component={SignIn} />
+                <Route path="/login" component={SignIn} />
                 <ConnectedSwitch>
-                  <Route path='/home' component={Home} />
-                  <Route path='/send' component={Send} />
-                  <Route path='/my-transactions' component={MyTransactions} />
+                  <Route path="/home" component={Home} />
+                  <Route path="/send" component={Send} />
+                  <Route path="/receive" component={Receive} />
+                  <Route path="/buy" component={Buy} />
                   <Route component={Home} />
                 </ConnectedSwitch>
               </Switch>
-            </TransactionContext.Provider>
-          </AuthContext.Provider>
+            </TransactionProvider>
+          </AuthProvider>
         </Router>
       </MuiThemeProvider>
     );
