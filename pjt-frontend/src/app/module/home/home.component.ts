@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { Node, Edge, ClusterNode } from "@swimlane/ngx-graph";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { BlockchainService } from "src/app/shared/blockchain.service";
+import { Link } from "src/app/model/link.model";
+import { Peer } from "src/app/model/peer.model";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-home",
@@ -10,14 +13,13 @@ import { BlockchainService } from "src/app/shared/blockchain.service";
 })
 export class HomeComponent implements OnInit {
   isLinear = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  transactionFormGroup: FormGroup;
   mapFormGroup: FormGroup;
-  entryDate: string;
-  idBlock: number;
-  ipAddress: string;
-  balance: number;
-  node = [];
+  blockFormGroup: FormGroup;
+  peers: Peer[] = [];
+  links: Link[] = [];
+  peerSubscription: Subscription;
+  linkSubscription: Subscription;
 
   // tslint:disable-next-line: variable-name
   constructor(
@@ -26,25 +28,24 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    /*=this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ["", Validators.required]
-    });*/
+    this.peerSubscription = this.blockchainService.peersSubject.subscribe(
+      (peers: []) => {
+        this.peers = peers;
+      }
+    );
 
-    this.node = this.blockchainService.getPeers();
+    this.linkSubscription = this.blockchainService.linksSubject.subscribe(
+      (link: []) => {
+        this.links = link;
+      }
+    );
 
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ["", Validators.required]
-    });
+    this.blockchainService.getPeers();
+
+    console.log(this.peers);
   }
 
-  test(node) {
-    this.entryDate = node.date;
-    this.ipAddress = node.ipAddress;
-    this.idBlock = node.idBlock;
-    this.balance = node.balance;
-    this.blockchainService.getBlockchain();
-    this.blockchainService.getBalance();
-    this.blockchainService.getPeers();
-    this.blockchainService.getTransaction();
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
   }
 }

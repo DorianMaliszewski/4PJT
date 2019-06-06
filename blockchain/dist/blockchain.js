@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generatenextBlockWithTransaction = exports.generateNextBlock = exports.getMyUnspentTransactionOutputs = exports.generateRawNextBlock = exports.getLatestBlock = exports.setUnspentTxOuts = exports.getUnspentTxOuts = exports.getBlockchain = void 0;
+exports.handleReceivedTransaction = exports.replaceChain = exports.addBlockToChain = exports.isValidNewBlock = exports.isValidBlockStructure = exports.calculateHash = exports.calculateHashForBlock = exports.sendTransaction = exports.getAccountBalance = exports.generatenextBlockWithTransaction = exports.generateNextBlock = exports.getMyUnspentTransactionOutputs = exports.generateRawNextBlock = exports.getLatestBlock = exports.setUnspentTxOuts = exports.getUnspentTxOuts = exports.getBlockchain = void 0;
 
 var _Block = _interopRequireDefault(require("./models/Block"));
 
@@ -30,18 +30,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 // First transaction on Coinbase
 var genesisTransaction = {
   txIns: [{
-    signature: '',
-    txOutId: '',
+    signature: "",
+    txOutId: "",
     txOutIndex: 0
   }],
   txOuts: [{
-    address: '04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a',
+    address: "04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a",
     amount: 50
   }],
-  id: 'e655f6a5f26dc9b4cac6e46f52336428287759cf81ef5ff10854f69d68f43fa3'
+  id: "e655f6a5f26dc9b4cac6e46f52336428287759cf81ef5ff10854f69d68f43fa3"
 }; // First Block
 
-var genesisBlock = new _Block["default"](0, '91a73664bc84c0baa1fc75ea6e4aa6d1d20c5df664c724e3159aefc2e1186627', '', 1465154705, [genesisTransaction], 0, 0);
+var genesisBlock = new _Block["default"](0, "91a73664bc84c0baa1fc75ea6e4aa6d1d20c5df664c724e3159aefc2e1186627", "", Math.round(new Date().getTime() / 1000), [genesisTransaction], 0, 0);
 var blockchain = [genesisBlock];
 var unspentTxOuts = transaction.processTransactions(blockchain[0].data, [], 0);
 /**
@@ -69,7 +69,7 @@ var getUnspentTxOuts = function getUnspentTxOuts() {
 exports.getUnspentTxOuts = getUnspentTxOuts;
 
 var setUnspentTxOuts = function setUnspentTxOuts(newUnspentTxOut) {
-  console.log('Replacing unspentTxouts with: ' + newUnspentTxOut);
+  console.log("Replacing unspentTxouts with: " + newUnspentTxOut);
   unspentTxOuts = newUnspentTxOut;
 };
 /**
@@ -181,11 +181,11 @@ exports.generateNextBlock = generateNextBlock;
 
 var generatenextBlockWithTransaction = function generatenextBlockWithTransaction(receiverAddress, amount) {
   if (!transaction.isValidAddress(receiverAddress)) {
-    throw Error('Invalid Address');
+    throw Error("Invalid Address");
   }
 
-  if (typeof amount !== 'number') {
-    throw Error('Invalid Amount');
+  if (typeof amount !== "number") {
+    throw Error("Invalid Amount");
   }
 
   var coinbaseTx = transaction.getCoinbaseTransaction(wallet.getPublicFromWallet(), getLatestBlock().index + 1);
@@ -238,30 +238,34 @@ var calculateHashForBlock = function calculateHashForBlock(block) {
   return calculateHash(block.index, block.previousHash, block.timestamp, block.data, block.difficulty, block.nonce);
 };
 
+exports.calculateHashForBlock = calculateHashForBlock;
+
 var calculateHash = function calculateHash(index, previousHash, timestamp, data, difficulty, nonce) {
   return _cryptoJs["default"].SHA256(index + previousHash + timestamp + data + difficulty + nonce).toString();
 };
 
+exports.calculateHash = calculateHash;
+
 var isValidBlockStructure = function isValidBlockStructure(block) {
-  return typeof block.index === 'number' && typeof block.hash === 'string' && typeof block.previousHash === 'string' && typeof block.timestamp === 'number' && _typeof(block.data) === 'object';
+  return typeof block.index === "number" && typeof block.hash === "string" && typeof block.previousHash === "string" && typeof block.timestamp === "number" && _typeof(block.data) === "object";
 };
 
 exports.isValidBlockStructure = isValidBlockStructure;
 
 var isValidNewBlock = function isValidNewBlock(newBlock, previousBlock) {
   if (!isValidBlockStructure(newBlock)) {
-    console.log('invalid block structure: %s', JSON.stringify(newBlock));
+    console.log("invalid block structure: %s", JSON.stringify(newBlock));
     return false;
   }
 
   if (previousBlock.index + 1 !== newBlock.index) {
-    console.log('invalid index');
+    console.log("invalid index");
     return false;
   } else if (previousBlock.hash !== newBlock.previousHash) {
-    console.log('invalid previoushash');
+    console.log("invalid previoushash");
     return false;
   } else if (!isValidTimestamp(newBlock, previousBlock)) {
-    console.log('invalid timestamp');
+    console.log("invalid timestamp");
     return false;
   } else if (!hasValidHash(newBlock)) {
     return false;
@@ -269,6 +273,8 @@ var isValidNewBlock = function isValidNewBlock(newBlock, previousBlock) {
 
   return true;
 };
+
+exports.isValidNewBlock = isValidNewBlock;
 
 var getAccumulatedDifficulty = function getAccumulatedDifficulty(aBlockchain) {
   return aBlockchain.map(function (block) {
@@ -286,12 +292,12 @@ var isValidTimestamp = function isValidTimestamp(newBlock, previousBlock) {
 
 var hasValidHash = function hasValidHash(block) {
   if (!hashMatchesBlockContent(block)) {
-    console.log('invalid hash, got:' + block.hash);
+    console.log("invalid hash, got:" + block.hash);
     return false;
   }
 
   if (!hashMatchesDifficulty(block.hash, block.difficulty)) {
-    console.log('block difficulty not satisfied. Expected: ' + block.difficulty + 'got: ' + block.hash);
+    console.log("block difficulty not satisfied. Expected: " + block.difficulty + "got: " + block.hash);
   }
 
   return true;
@@ -304,7 +310,7 @@ var hashMatchesBlockContent = function hashMatchesBlockContent(block) {
 
 var hashMatchesDifficulty = function hashMatchesDifficulty(hash, difficulty) {
   var hashInBinary = util.hexToBinary(hash);
-  var requiredPrefix = '0'.repeat(difficulty);
+  var requiredPrefix = "0".repeat(difficulty);
   return hashInBinary.startsWith(requiredPrefix);
 };
 /*
@@ -313,7 +319,7 @@ var hashMatchesDifficulty = function hashMatchesDifficulty(hash, difficulty) {
 
 
 var isValidChain = function isValidChain(blockchainToValidate) {
-  console.log('isValidChain:');
+  console.log("isValidChain:");
   console.log(JSON.stringify(blockchainToValidate));
 
   var isValidGenesis = function isValidGenesis(block) {
@@ -341,7 +347,7 @@ var isValidChain = function isValidChain(blockchainToValidate) {
     aUnspentTxOuts = transaction.processTransactions(currentBlock.data, aUnspentTxOuts, currentBlock.index);
 
     if (aUnspentTxOuts === null) {
-      console.log('invalid transactions in blockchain');
+      console.log("invalid transactions in blockchain");
       return null;
     }
   }
@@ -354,7 +360,7 @@ var addBlockToChain = function addBlockToChain(newBlock) {
     var retVal = transaction.processTransactions(newBlock.data, getUnspentTxOuts(), newBlock.index);
 
     if (retVal === null) {
-      console.log('block is not valid in terms of transactions');
+      console.log("block is not valid in terms of transactions");
       return false;
     } else {
       blockchain.push(newBlock);
@@ -374,13 +380,13 @@ var replaceChain = function replaceChain(newBlocks) {
   var validChain = aUnspentTxOuts !== null;
 
   if (validChain && getAccumulatedDifficulty(newBlocks) > getAccumulatedDifficulty(getBlockchain())) {
-    console.log('Received blockchain is valid. Replacing current blockchain with received blockchain');
+    console.log("Received blockchain is valid. Replacing current blockchain with received blockchain");
     blockchain = newBlocks;
     setUnspentTxOuts(aUnspentTxOuts);
     transactionPool.updateTransactionPool(unspentTxOuts);
     p2p.broadcastLatest();
   } else {
-    console.log('Received blockchain invalid');
+    console.log("Received blockchain invalid");
   }
 };
 

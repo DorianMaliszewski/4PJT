@@ -1,12 +1,34 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
+import { Peer } from "../model/peer.model";
+import { Link } from "../model/link.model";
 
 @Injectable({
   providedIn: "root"
 })
 export class BlockchainService {
+  blocksSubject = new Subject<any[]>();
+  peersSubject = new Subject<any[]>();
+  linksSubject = new Subject<any[]>();
+
+  private blocks = [];
+  private peers = [];
+  private links = [];
+
   constructor(private httpClient: HttpClient) {}
+
+  emitBlocksSubject() {
+    this.blocksSubject.next(this.blocks.slice());
+  }
+
+  emitPeersSubject() {
+    this.peersSubject.next(this.peers.slice());
+  }
+
+  emitLinksSubject() {
+    this.linksSubject.next(this.links.slice());
+  }
 
   public getResource(resourceUrl): Observable<any> {
     const user = localStorage.getItem("currentUser");
@@ -21,26 +43,73 @@ export class BlockchainService {
   }
 
   getBlockchain() {
-    this.getResource("/api/blocks").subscribe(
-      response => {
-        console.log("block : " + response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.getResource("/api/blocks")
+      .toPromise()
+      .then(
+        response => {
+          this.blocks = response;
+          this.emitBlocksSubject();
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
-  getPeers(): any {
-    this.getResource("/api/peers").subscribe(
-      response => {
-        console.log("peer : " + response);
-        return response;
-      },
-      error => {
-        console.log(error);
+  getPeers() {
+    this.getResource("/api/peers")
+      .toPromise()
+      .then(
+        response => {
+          let el = 0;
+          for (let i = 0; i < response.length; i++) {
+            let node = new Peer(response[i], response[i]);
+            // tslint:disable-next-line: no-unused-expression
+            if (!this.verifDoubleNode(node)) {
+              this.peers.push(node);
+              this.emitPeersSubject();
+              console.log(i);
+            }
+            if (el === 0) {
+              console.log(i);
+              let link = new Link(
+                this.getRandomId(),
+                response[i],
+                response[i + 1],
+                "custom label"
+              );
+              this.links.push(link);
+
+              this.emitLinksSubject();
+              el++;
+            } else {
+              console.log("else");
+              console.log(i);
+              el = 0;
+            }
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  getRandomId(): string {
+    return Math.random()
+      .toString(36)
+      .substring(7);
+  }
+
+  // tslint:disable-next-line: ban-types
+  verifDoubleNode(node: Peer): Boolean {
+    let find = false;
+    this.peers.forEach(element => {
+      if (element.id === node.id) {
+        find = true;
       }
-    );
+    });
+    return find;
   }
 
   getBalance() {
@@ -54,14 +123,5 @@ export class BlockchainService {
     );
   }
 
-  getTransaction() {
-    this.getResource("/api/transactions").subscribe(
-      response => {
-        console.log("trans : " + response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+  getTransactionByBlock(block: any) {}
 }

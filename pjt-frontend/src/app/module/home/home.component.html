@@ -4,9 +4,8 @@
   <div class="row">
     <div class="col">
       <section>
-        <h4>Bienvenue sur le POC de SUPBANK</h4>
+        <h4 style="text-align: center">Bienvenue sur le POC de SUPBANK</h4>
         <article>
-          <h6>Objectif</h6>
           <p>
             SupBank a décidé de créer son propre système de stockage et
             transmettre des informations de transaction bancaire. Ce nouveau
@@ -21,12 +20,19 @@
             <li>Historique complet des transactions</li>
           </ul>
         </article>
-        <article>
-          <h6>La blockchain ?</h6>
+        <br />
+        <article class="def">
           <p>
-            La blockchain est un systeme de c La blockchain est un systeme de
-            cLa blockchain est un systeme de cLa blockchain est un systeme de
-            cLa blockchain est un systeme de c
+            <strong>La Blockchain</strong> (dont la traduction en français est
+            chaîne de blocs) est une technologie qui permet de stocker et
+            transmettre des informations de manière transparente, sécurisée et
+            sans organe central de contrôle. Elle ressemble à une grande base de
+            données qui contient l'historique de tous les échanges réalisés
+            entre ses utilisateurs depuis sa création. La blockchain peut être
+            utilisée de trois façons : pour du transfert d'actifs (monnaie,
+            titres, actions…), pour une meilleure traçabilité d'actifs et
+            produits et pour exécuter automatiquement des contrats (des "smart
+            contracts").
           </p>
         </article>
       </section>
@@ -35,39 +41,15 @@
       <h4>Représentation interactive des noeuds</h4>
       <ngx-graph
         layout="colaForceDirected"
-        [links]="[
+        [links]="links"
+        [nodes]="peers"
+        [clusters]="[
           {
-            id: 'a',
-            source: 'first',
-            target: 'second',
-            label: 'is parent of'
-          },
-          {
-            id: 'b',
-            source: 'first',
-            target: 'c1',
-            label: 'custom label'
-          },
-          {
-            id: 'd',
-            source: 'first',
-            target: 'c2',
-            label: 'custom label'
-          },
-          {
-            id: 'e',
-            source: 'c1',
-            target: 'd',
-            label: 'first link'
-          },
-          {
-            id: 'f',
-            source: 'c1',
-            target: 'c2',
-            label: 'second link'
+            id: 'third',
+            label: 'Serveur redondant',
+            childNodeIds: ['127.0.0.1:6001']
           }
         ]"
-        [nodes]="node"
       >
         <ng-template #nodeTemplate let-node>
           <svg:g class="node" ngx-tooltip>
@@ -82,7 +64,7 @@
               [attr.x]="10"
               [attr.y]="node.dimension.height / 2"
             >
-              {{ node.label }}
+              {{ peers.label }}
             </svg:text>
           </svg:g>
         </ng-template>
@@ -91,29 +73,19 @@
   </div>
 </div>
 
-<mat-horizontal-stepper labelPosition="bottom" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <ng-template matStepLabel>Informations</ng-template>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <p>Date d'entrée : {{ entryDate }}</p>
-          <p>Adresse IP : {{ ipAddress }}</p>
-        </div>
-        <div class="col">
-          <p>Identifiant du noeud : {{ idBlock }}</p>
-          <p>Balance : {{ balance }}</p>
-        </div>
-      </div>
-    </div>
+<mat-horizontal-stepper
+  labelPosition="bottom"
+  style="text-align: center;    margin: 5%;
+  background-color: gainsboro;"
+  #stepper
+>
+  <mat-step [stepControl]="blockFormGroup">
+    <ng-template matStepLabel>Tous les blocks</ng-template>
+    <app-block></app-block>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <ng-template matStepLabel>Liste de transaction</ng-template>
-    <app-historique></app-historique>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Next</button>
-    </div>
+  <mat-step [stepControl]="transactionFormGroup">
+    <ng-template matStepLabel>Liste des transactions</ng-template>
+    <app-transaction></app-transaction>
   </mat-step>
   <mat-step [stepControl]="mapFormGroup">
     <ng-template matStepLabel>Position sur Map</ng-template>
@@ -168,6 +140,40 @@
             id: 'third',
             label: 'Serveur redondant',
             childNodeIds: ['c1', 'c2']
+          }
+        ]
+
+        ----------------------
+        [
+          {
+            id: 'a',
+            source: 'first',
+            target: 'second',
+            label: 'is parent of'
+          },
+          {
+            id: 'b',
+            source: 'first',
+            target: 'c1',
+            label: 'custom label'
+          },
+          {
+            id: 'd',
+            source: 'first',
+            target: 'c2',
+            label: 'custom label'
+          },
+          {
+            id: 'e',
+            source: 'c1',
+            target: 'd',
+            label: 'first link'
+          },
+          {
+            id: 'f',
+            source: 'c1',
+            target: 'c2',
+            label: 'second link'
           }
         ]
 -->
