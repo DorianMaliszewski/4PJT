@@ -8,7 +8,7 @@ import TxOut from './models/TxOut';
 import Transaction from './models/Transaction';
 
 const EC = new ec('secp256k1');
-const privateKeyLocation = process.env.PRIVATE_KEY || 'node/wallet/private_key';
+const privateKeyLocation = process.env.PRIVATE_KEY || __dirname + '/private_key';
 
 const getPrivateFromWallet = () => {
   const buffer = readFileSync(privateKeyLocation, 'utf8');
@@ -131,7 +131,7 @@ const createTransaction = (receiverAddress, amount, privateKey, unspentTxOuts, t
   tx.txIns = unsignedTxIns;
   tx.txOuts = createTxOuts(receiverAddress, myAddress, amount, leftOverAmount);
   tx.id = getTransactionId(tx);
-
+  tx.address = getPublicFromWallet();
   tx.txIns = tx.txIns.map((txIn, index) => {
     txIn.signature = signTxIn(tx, index, privateKey, unspentTxOuts);
     return txIn;

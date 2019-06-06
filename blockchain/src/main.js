@@ -6,12 +6,16 @@ import * as p2p from './p2p';
 import * as transactionPool from './transactionPool';
 import * as wallet from './wallet';
 import cors from 'cors';
+import path from 'path';
 
 const httpPort = parseInt(process.env.HTTP_PORT) || 3001;
 const p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 
 const initHttpServer = myHttpPort => {
   const app = express();
+
+  // Serve the static files from the React app
+  app.use(express.static(path.join(__dirname, './build')));
 
   app.use(
     cors({
@@ -49,6 +53,9 @@ const initHttpServer = myHttpPort => {
   });
   app.get('/myUnspentTransactionOutputs', (req, res) => {
     res.send(blockchain.getMyUnspentTransactionOutputs());
+  });
+  app.get('/myTransaction', (req, res) => {
+    res.send(blockchain.findMyTx());
   });
   app.post('/mineRawBlock', (req, res) => {
     if (req.body.data == null) {
@@ -118,11 +125,21 @@ const initHttpServer = myHttpPort => {
     process.exit();
   });
 
+  // Handles any requests that don't match the ones above
+  app.get('*', (req, res) => {
+<<<<<<< HEAD
+    res.sendFile(path.join(__dirname + '/build/index.html'));
+=======
+    res.sendFile(path.join(__dirname + './build/index.html'));
+>>>>>>> 464355f8d3db998321ba1bbfcc2ad136eb58d183
+  });
+
   app.listen(myHttpPort, () => {
     console.log('Listening http on port: ' + myHttpPort);
+    p2p.connectToPeers('ws://51.75.143.85:6001');
+    p2p.connectToPeers('ws://dorianmaliszewski:6001');
   });
 };
-
+wallet.initWallet();
 initHttpServer(httpPort);
 p2p.initP2PServer(p2pPort);
-wallet.initWallet();

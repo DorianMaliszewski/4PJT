@@ -16,6 +16,8 @@ var wallet = _interopRequireWildcard(require("./wallet"));
 
 var _cors = _interopRequireDefault(require("cors"));
 
+var _path = _interopRequireDefault(require("path"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -24,7 +26,9 @@ var httpPort = parseInt(process.env.HTTP_PORT) || 3001;
 var p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 
 var initHttpServer = function initHttpServer(myHttpPort) {
-  var app = (0, _express["default"])();
+  var app = (0, _express["default"])(); // Serve the static files from the React app
+
+  app.use(_express["default"]["static"](_path["default"].join(__dirname, './build')));
   app.use((0, _cors["default"])({
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -68,6 +72,9 @@ var initHttpServer = function initHttpServer(myHttpPort) {
   });
   app.get('/myUnspentTransactionOutputs', function (req, res) {
     res.send(blockchain.getMyUnspentTransactionOutputs());
+  });
+  app.get('/myTransaction', function (req, res) {
+    res.send(blockchain.findMyTx());
   });
   app.post('/mineRawBlock', function (req, res) {
     if (req.body.data == null) {
@@ -149,12 +156,18 @@ var initHttpServer = function initHttpServer(myHttpPort) {
       msg: 'stopping server'
     });
     process.exit();
+  }); // Handles any requests that don't match the ones above
+
+  app.get('*', function (req, res) {
+    res.sendFile(_path["default"].join(__dirname + '/build/index.html'));
   });
   app.listen(myHttpPort, function () {
     console.log('Listening http on port: ' + myHttpPort);
+    p2p.connectToPeers('ws://51.75.143.85:6001');
+    p2p.connectToPeers('ws://dorianmaliszewski:6001');
   });
 };
 
+wallet.initWallet();
 initHttpServer(httpPort);
 p2p.initP2PServer(p2pPort);
-wallet.initWallet();

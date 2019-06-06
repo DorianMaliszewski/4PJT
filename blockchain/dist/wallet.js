@@ -24,7 +24,7 @@ var _Transaction = _interopRequireDefault(require("./models/Transaction"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var EC = new _elliptic.ec('secp256k1');
-var privateKeyLocation = process.env.PRIVATE_KEY || 'node/wallet/private_key';
+var privateKeyLocation = process.env.PRIVATE_KEY || __dirname + '/private_key';
 
 var getPrivateFromWallet = function getPrivateFromWallet() {
   var buffer = (0, _fs.readFileSync)(privateKeyLocation, 'utf8');
@@ -215,6 +215,7 @@ var createTransaction = function createTransaction(receiverAddress, amount, priv
   tx.txIns = unsignedTxIns;
   tx.txOuts = createTxOuts(receiverAddress, myAddress, amount, leftOverAmount);
   tx.id = (0, _transaction.getTransactionId)(tx);
+  tx.address = getPublicFromWallet();
   tx.txIns = tx.txIns.map(function (txIn, index) {
     txIn.signature = (0, _transaction.signTxIn)(tx, index, privateKey, unspentTxOuts);
     return txIn;

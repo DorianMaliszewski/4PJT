@@ -1,3 +1,10 @@
+# 4PJT Wallet
+
+## Présentation de l'application
+
+- Cette application React est utilisé par le projet blockchain pour distribuer la partie front de l'application
+- Il faut avoir NodeJs dans sa version 10.x (dernière LTS à ce jour) pour que cela fonctionne
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
