@@ -50,6 +50,9 @@ const initHttpServer = myHttpPort => {
   app.get('/myUnspentTransactionOutputs', (req, res) => {
     res.send(blockchain.getMyUnspentTransactionOutputs());
   });
+  app.get('/myTransaction', (req, res) => {
+    res.send(blockchain.findMyTx());
+  });
   app.post('/mineRawBlock', (req, res) => {
     if (req.body.data == null) {
       res.send('data parameter is missing');

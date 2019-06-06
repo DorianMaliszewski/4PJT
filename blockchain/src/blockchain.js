@@ -8,19 +8,24 @@ import * as transactionPool from './transactionPool';
 import * as util from './util';
 import * as wallet from './wallet';
 
+/**
+ * Return current timestamp without milliseconds
+ */
+export const getCurrentTimestamp = () => Math.round(new Date().getTime() / 1000);
+
 // First transaction on Coinbase
 const genesisTransaction = {
   txIns: [{ signature: '', txOutId: '', txOutIndex: 0 }],
   txOuts: [
     {
       address: '04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a',
-      amount: 50
+      amount: 10
     }
   ],
-  id: 'e655f6a5f26dc9b4cac6e46f52336428287759cf81ef5ff10854f69d68f43fa3'
+  id: '43c0a424fb738ed2f64b3758fa0f5eb52b753d579d2d2d2764ef7df815ddd66d'
 };
 // First Block
-const genesisBlock = new Block(0, '91a73664bc84c0baa1fc75ea6e4aa6d1d20c5df664c724e3159aefc2e1186627', '', 1465154705, [genesisTransaction], 0, 0);
+const genesisBlock = new Block(0, '91a73664bc84c0baa1fc75ea6e4aa6d1d20c5df664c724e3159aefc2e1186627', '', 0, [genesisTransaction], 0, 0);
 
 let blockchain = [genesisBlock];
 let unspentTxOuts = transaction.processTransactions(blockchain[0].data, [], 0);
@@ -81,11 +86,6 @@ const getAdjustedDifficulty = (latestBlock, aBlockchain) => {
     return prevAdjustmentBlock.difficulty;
   }
 };
-
-/**
- * Return current timestamp without milliseconds
- */
-const getCurrentTimestamp = () => Math.round(new Date().getTime() / 1000);
 
 /**
  * Generate a new block with some data
@@ -167,6 +167,14 @@ export const sendTransaction = (address, amount) => {
   return tx;
 };
 
+export const findMyTx = () => {
+  var txs = [];
+  blockchain.forEach(block => {
+    block.data.filter(data => data.address === wallet.getPublicFromWallet()).forEach(data => txs.push(...data.txOuts));
+  });
+  return txs;
+};
+
 export const calculateHashForBlock = block => calculateHash(block.index, block.previousHash, block.timestamp, block.data, block.difficulty, block.nonce);
 export const calculateHash = (index, previousHash, timestamp, data, difficulty, nonce) => CryptoJS.SHA256(index + previousHash + timestamp + data + difficulty + nonce).toString();
 export const isValidBlockStructure = block => {
@@ -217,6 +225,7 @@ const hashMatchesBlockContent = block => {
 };
 const hashMatchesDifficulty = (hash, difficulty) => {
   const hashInBinary = util.hexToBinary(hash);
+  console.log('Difficulty : ' + difficulty);
   const requiredPrefix = '0'.repeat(difficulty);
   return hashInBinary.startsWith(requiredPrefix);
 };
