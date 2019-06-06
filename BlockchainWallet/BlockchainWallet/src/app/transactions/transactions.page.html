@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      <span style="font-size: 23px;margin-top: 9px;position: absolute;text-align: center;margin-left: 87px;"> Transactions  </span>
+      <ion-button color="danger" (click)="logout()" style="float: right"><ion-icon name="log-out"  ></ion-icon></ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="transactions !== []">
+
+  <ion-searchbar (input)="onSearchChange($event.target.value)" (ionClear)="getAllTransactions()"></ion-searchbar>
+  <br><br>
+  <div *ngIf="searchValue != ''">
+  <table class="rwd-table">
+    <tr>
+      <th>Sender</th>
+      <th>Recipient</th>
+      <th>Amount</th>
+
+    </tr>
+
+    <tr *ngFor="let transaction of searchResult; let i = index">
+      <td data-th="Sender" *ngIf="transaction.sender === 'recompense'">{{transaction.sender | slice:0:10 }}</td>
+      <td data-th="Sender" *ngIf="transaction.sender !== 'recompense'">{{transaction.sender | slice:0:10 }}...</td>
+      <td data-th="Recipient">{{transaction.recipient | slice:0:10}}...</td>
+      <td data-th="Amount">{{transaction.amount }} €</td>
+      <ion-button shape="round" expand="full"  color="warning" (click)="viewDetails(transaction)">Details</ion-button>
+    </tr>
+
+  </table>
+  </div>
+
+
+  <div *ngIf="searchValue == ''">
+    <table class="rwd-table">
+      <tr>
+        <th>Sender</th>
+        <th>Recipient</th>
+        <th>Amount</th>
+
+      </tr>
+
+      <tr *ngFor="let transaction of transactions; let i = index">
+        <td data-th="Sender" *ngIf="transaction.sender === 'recompense'">{{transaction.sender | slice:0:10 }}</td>
+        <td data-th="Sender" *ngIf="transaction.sender !== 'recompense'">{{transaction.sender | slice:0:10 }}...</td>
+        <td data-th="Recipient">{{transaction.recipient | slice:0:10}}...</td>
+        <td data-th="Amount">{{transaction.amount }} €</td>
+        <ion-button shape="round" expand="full"  color="warning" (click)="viewDetails(transaction)">Details</ion-button>
+      </tr>
+
+    </table>
+  </div>
+</ion-content>
+
+

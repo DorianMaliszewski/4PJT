@@ -1,0 +1,36 @@
+<ion-header *ngIf="source != ''">
+  <ion-toolbar color="primary">
+    <ion-button slot="start" (click)="goToBlockDetails()">
+      <ion-back-button style="color: white; font-weight: bold; display: block;"></ion-back-button>
+    </ion-button>
+    <ion-title text-center style="font-weight: bold"> Details </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-header *ngIf="source === ''">
+  <ion-toolbar color="primary">
+    <ion-button slot="start" >
+      <ion-back-button defaultHref="/transactions" style="color: white; font-weight: bold; display: block;"></ion-back-button>
+    </ion-button>
+    <ion-title text-center style="font-weight: bold"> Details </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <br><br><br><br><br><br>
+  <table class="rwd-table">
+    <tr>
+      <th>Sender</th>
+      <th>Recipient</th>
+      <th>Amount</th>
+
+    </tr>
+
+    <tr>
+      <td data-th="Sender">{{transaction.sender}}</td>
+      <td data-th="Recipient">{{transaction.recipient}}</td>
+      <td data-th="Amount">{{transaction.amount }} €</td>
+    </tr>
+
+  </table>
+
+</ion-content>

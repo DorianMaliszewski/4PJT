@@ -1,0 +1,38 @@
+<app-myheader></app-myheader>
+<ion-content>
+    <br>
+    <br>
+    <div class="ion-padding">
+
+        <round-progress [current]="percent"
+                        [radius]="45"
+                        [color]="'#4801b8'"
+                        [stroke]="5"
+                        [max]="max"><ion-input [(ngModel)]="percent"></ion-input></round-progress>
+
+        <span style="font-size: 16px; color: blue; font-weight: bold">{{numberItem}} Transaction(s)</span>
+      <br> <br>
+    <strong>SupBank </strong>is an online European banking company focused on deposit accounts,<br>
+    overdraft, credit and investment products. As with all existing banks. <br> <br>
+    SupBank faces the limitations of the international SWIFT and SEPA payment <br>
+    systems for international and European transfers. <br> <br>
+    SupBank has decided to create its own system for storing and transmitting <br>
+    banking transaction information. This new system will have the following features: <br>
+    <ul>
+     <li>Instant (nearly) wires </li><br>
+     <li>Fee-less foreign exchange </li>
+      <br>
+     <li>Decentralized </li>
+      <br>
+     <li>Tamper-proof and secure </li>
+      <br>
+     <li>Seamless transition for users </li>
+      <br>
+    <li>Full transaction history</li>
+      <br>
+    </ul>
+  </div>
+</ion-content>
+
+
+

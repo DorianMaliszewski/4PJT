@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title text-center color="white">My Blockchain App</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center >
+  <br><br>
+  <ion-card class="login-content">
+
+    <img src="../../../assets/images/Blockchain_Logo.jpg" class="info-img"/>
+    <ion-card-header >
+      <ion-card-title >Authentication</ion-card-title>
+    </ion-card-header>
+    <ion-card-content >
+
+      <ion-list>
+        <!--<div class="col-10" *ngIf="incorrectPassword">-->
+          <!--<ion-text color="danger">Please enter a valid Password</ion-text>-->
+        <!--</div>-->
+        <!--<div class="col-10" *ngIf="NoExistinguser">-->
+          <!--<ion-text color="danger">No existing user with these credentials ! </ion-text>-->
+        <!--</div>-->
+        <ion-item>
+          <strong><ion-label floating></ion-label> </strong>
+          <ion-input type="text" [(ngModel)]="username" placeholder="Username"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <strong><ion-label floating ></ion-label> </strong>
+          <ion-input type="password" value="" placeholder="Password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-button shape="round" expand="full" color="success" (click)="onSubmitForm()">Sign In</ion-button>
+        <ion-button shape="round" expand="full" color="primary" (click)="socialSignIn('facebook')">Sign In with Facebook</ion-button>
+        <ion-button shape="round" expand="full" color="google" (click)="socialSignIn('google')">Sign in with Google</ion-button>
+        <!--<ion-button shape="round" expand="full" (click)="signUp()">Sign Up</ion-button>-->
+      </ion-list>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
