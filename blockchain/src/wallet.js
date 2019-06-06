@@ -131,7 +131,7 @@ const createTransaction = (receiverAddress, amount, privateKey, unspentTxOuts, t
   tx.txIns = unsignedTxIns;
   tx.txOuts = createTxOuts(receiverAddress, myAddress, amount, leftOverAmount);
   tx.id = getTransactionId(tx);
-
+  tx.address = getPublicFromWallet();
   tx.txIns = tx.txIns.map((txIn, index) => {
     txIn.signature = signTxIn(tx, index, privateKey, unspentTxOuts);
     return txIn;
