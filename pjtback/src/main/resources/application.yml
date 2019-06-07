@@ -4,9 +4,8 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://localhost/pjtback?serverTimezone=UTC
-    password:
+    password: root
     username: root
-    driver-class-name: com.mysql.jdbc.Driver
 
   jpa:
     hibernate:
@@ -15,7 +14,7 @@ spring:
 
 
   flyway:
-    user: root
-    schemas: pjtback
-    password:
-    enabled: false
+    enabled: true
+
+application:
+  base-url: http://locahost:4200

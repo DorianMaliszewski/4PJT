@@ -1,11 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, Subject } from "rxjs";
-import { Peer } from "../model/peer.model";
-import { Link } from "../model/link.model";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, Subject } from 'rxjs';
+import { Peer } from '../model/peer.model';
+import { Link } from '../model/link.model';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class BlockchainService {
   blocksSubject = new Subject<any[]>();
@@ -31,19 +32,19 @@ export class BlockchainService {
   }
 
   public getResource(resourceUrl): Observable<any> {
-    const user = localStorage.getItem("currentUser");
+    const user = localStorage.getItem('currentUser');
     const headers = new HttpHeaders({
-      "Content-type": "applicationjson; charset=utf-8",
-      Authorization: "Bearer " + JSON.parse(user).token.access_token
+      'Content-type': 'applicationjson; charset=utf-8',
+      Authorization: 'Bearer ' + JSON.parse(user).token.access_token
     });
     const options = {
       headers
     };
-    return this.httpClient.get(resourceUrl, options);
+    return this.httpClient.get(environment.server_url + resourceUrl, options);
   }
 
   getBlockchain() {
-    this.getResource("/api/blocks")
+    this.getResource('/api/blocks')
       .toPromise()
       .then(
         response => {
@@ -57,7 +58,7 @@ export class BlockchainService {
   }
 
   getPeers() {
-    this.getResource("/api/peers")
+    this.getResource('/api/peers')
       .toPromise()
       .then(
         response => {
@@ -72,18 +73,13 @@ export class BlockchainService {
             }
             if (el === 0) {
               console.log(i);
-              let link = new Link(
-                this.getRandomId(),
-                response[i],
-                response[i + 1],
-                "custom label"
-              );
+              let link = new Link(this.getRandomId(), response[i], response[i + 1], 'custom label');
               this.links.push(link);
 
               this.emitLinksSubject();
               el++;
             } else {
-              console.log("else");
+              console.log('else');
               console.log(i);
               el = 0;
             }
@@ -113,9 +109,9 @@ export class BlockchainService {
   }
 
   getBalance() {
-    this.getResource("/api/balance").subscribe(
+    this.getResource('/api/balance').subscribe(
       response => {
-        console.log("balance : " + response);
+        console.log('balance : ' + response);
       },
       error => {
         console.log(error);
