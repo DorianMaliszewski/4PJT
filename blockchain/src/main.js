@@ -133,7 +133,7 @@ const initHttpServer = myHttpPort => {
   app.listen(myHttpPort, () => {
     console.log('Listening http on port: ' + myHttpPort);
     p2p.connectToPeers('ws://51.75.143.85:6001');
-    p2p.connectToPeers('ws://dorianmaliszewski:6001');
+    p2p.connectToPeers('ws://dorianmaliszewski.fr:6001');
   });
 };
 wallet.initWallet();
