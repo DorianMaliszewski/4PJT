@@ -14,6 +14,7 @@
     "electron": "electron .",
     "build-electron": "electron-packager . --overwrite",
     "build-electron-win": "electron-packager . --overwrite --platform=win32",
+    "build-electron-mac": "electron-packager . --overwrite --platform=darwin",
     "watch": "nodemon"
   },
   "dependencies": {

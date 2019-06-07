@@ -3,4 +3,5 @@ node_modules
 .vscode
 4pjtblockchain-linux-x64
 4pjtblockchain-win32-x64
+4pjtblockchain-darwin-x64
 build
