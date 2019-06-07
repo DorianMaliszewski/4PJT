@@ -53,6 +53,11 @@ For Windows:
 npm run build && npm run build-electron-win
 ```
 
+For Mac:
+```
+npm run build && npm run build-electron-mac
+```
+
 ## Action sur l'API de la Blockchain
 
 ##### Récupérer la blockchain
