@@ -28,7 +28,7 @@ var p2pPort = parseInt(process.env.P2P_PORT) || 6001;
 var initHttpServer = function initHttpServer(myHttpPort) {
   var app = (0, _express["default"])(); // Serve the static files from the React app
 
-  app.use(_express["default"]["static"](_path["default"].join(__dirname, './build')));
+  app.use(_express["default"]["static"](_path["default"].join(__dirname, '/build')));
   app.use((0, _cors["default"])({
     origin: '*',
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -164,7 +164,7 @@ var initHttpServer = function initHttpServer(myHttpPort) {
   app.listen(myHttpPort, function () {
     console.log('Listening http on port: ' + myHttpPort);
     p2p.connectToPeers('ws://51.75.143.85:6001');
-    p2p.connectToPeers('ws://dorianmaliszewski:6001');
+    p2p.connectToPeers('ws://dorianmaliszewski.fr:6001');
   });
 };
 
