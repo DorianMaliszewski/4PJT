@@ -17,4 +17,4 @@ spring:
     enabled: true
 
 application:
-  base-url: http://locahost:4200
+  base-url: http://nosjean.tech

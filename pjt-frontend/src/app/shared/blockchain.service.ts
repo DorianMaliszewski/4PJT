@@ -35,7 +35,7 @@ export class BlockchainService {
     const user = localStorage.getItem('currentUser');
     const headers = new HttpHeaders({
       'Content-type': 'applicationjson; charset=utf-8',
-      Authorization: 'Bearer ' + JSON.parse(user).token.access_token
+      Authorization: 'Bearer ' + JSON.parse(user).token
     });
     const options = {
       headers

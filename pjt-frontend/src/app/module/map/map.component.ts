@@ -8,6 +8,7 @@ import { Coord } from "src/app/model/coord.model";
   styleUrls: ["./map.component.scss"]
 })
 export class MapComponent implements OnInit {
+  public title = "";
   coords: Coord[] = [
     {
       lat: 45.74846,

@@ -1,7 +1,7 @@
-/*
+
 drop table if exists oauth_client_details;
 create table oauth_client_details (
-  client_id VARCHAR(255) PRIMARY KEY,
+  client_id VARCHAR(100) PRIMARY KEY,
   resource_ids VARCHAR(255),
   client_secret VARCHAR(255),
   scope VARCHAR(255),
@@ -18,7 +18,7 @@ drop table if exists oauth_client_token;
 create table oauth_client_token (
   token_id VARCHAR(255),
   token LONG VARBINARY,
-  authentication_id VARCHAR(255) PRIMARY KEY,
+  authentication_id VARCHAR(100) PRIMARY KEY,
   user_name VARCHAR(255),
   client_id VARCHAR(255)
 );
@@ -27,7 +27,7 @@ drop table if exists oauth_access_token;
 create table oauth_access_token (
   token_id VARCHAR(255),
   token LONG VARBINARY,
-  authentication_id VARCHAR(255) PRIMARY KEY,
+  authentication_id VARCHAR(100) PRIMARY KEY,
   user_name VARCHAR(255),
   client_id VARCHAR(255),
   authentication LONG VARBINARY,
@@ -58,7 +58,7 @@ create table oauth_approvals (
 
 drop table if exists ClientDetails;
 create table ClientDetails (
-  appId VARCHAR(255) PRIMARY KEY,
+  appId VARCHAR(100) PRIMARY KEY,
   resourceIds VARCHAR(255),
   appSecret VARCHAR(255),
   scope VARCHAR(255),
@@ -71,5 +71,5 @@ create table ClientDetails (
   autoApproveScopes VARCHAR(255)
 );
 
-  insert into oauth_client_details values ('Blockchain', 'ms/pjtback', '{bcrypt}$2a$10$vx0JGxEXBzvtj0vK3DeHueahgllZAySsknp/HVO3Uc7PjenIFtf1m', 'Blockchain', 'password,refresh_token', null, '', 3600, 9000, '{}', '');
-*/
+insert into oauth_client_details values ('Blockchain', 'ms/pjtback', '{bcrypt}$2a$10$vx0JGxEXBzvtj0vK3DeHueahgllZAySsknp/HVO3Uc7PjenIFtf1m', 'Blockchain', 'password,refresh_token', null, '', 3600, 9000, '{}', '');
+

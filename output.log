@@ -1,0 +1,20 @@
+internal/modules/cjs/loader.js:626
+    throw err;
+    ^
+
+Error: Cannot find module 'electron'
+Require stack:
+- /srv/4PJT/blockchain/main.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:623:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:527:27)
+    at Module.require (internal/modules/cjs/loader.js:681:19)
+    at require (internal/modules/cjs/helpers.js:16:16)
+    at Object.<anonymous> (/srv/4PJT/blockchain/main.js:1:32)
+    at Module._compile (internal/modules/cjs/loader.js:774:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:785:10)
+    at Module.load (internal/modules/cjs/loader.js:641:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:556:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:837:10) {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [ '/srv/4PJT/blockchain/main.js' ]
+}
