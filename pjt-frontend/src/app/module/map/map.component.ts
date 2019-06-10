@@ -1,14 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { MapService } from "./shared/map.service";
-import { Coord } from "src/app/model/coord.model";
+import { Component, OnInit } from '@angular/core';
+import { MapService } from './shared/map.service';
+import { Coord } from 'src/app/model/coord.model';
 
 @Component({
-  selector: "app-map",
-  templateUrl: "./map.component.html",
-  styleUrls: ["./map.component.scss"]
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
-  public title = "";
+  public title = '';
   coords: Coord[] = [
     {
       lat: 45.74846,
@@ -20,16 +20,16 @@ export class MapComponent implements OnInit {
     }
   ];
 
-  ipaddress: ["91.207.208.153", "91.210.208.153"];
+  ipaddress: [];
 
   lat: number = 45.74846;
   lng: number = 4.84671;
   constructor(private MapService: MapService) {}
 
   ngOnInit() {
-    /*this.ipaddress.forEach(element => {
+    this.ipaddress.forEach(element => {
       this.MapService.getCoords(element);
-    });*/
+    });
     //this.MapService.getCoords("91.207.208.153");
   }
 }
