@@ -9,11 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-    private toastr: ToastrService
-  ) {}
+  constructor(private httpClient: HttpClient, private router: Router, private toastr: ToastrService) {}
 
   public login(username: string, password: string) {
     const params = new URLSearchParams();
@@ -28,17 +24,15 @@ export class LoginService {
     const options = {
       headers
     };
-    this.httpClient
-      .post(environment.server_url + '/oauth/token', params.toString(), options)
-      .subscribe(
-        data => {
-          this.saveToken(data, username);
-          this.router.navigate(['/home']);
-        },
-        error => {
-          this.toastr.error('Erreur', 'Login ou mot de passe incorrect');
-        }
-      );
+    this.httpClient.post<any>(environment.server_url + '/oauth/token', params.toString(), options).subscribe(
+      data => {
+        this.saveToken(data.access_token, username);
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.toastr.error('Erreur', 'Login ou mot de passe incorrect');
+      }
+    );
   }
 
   saveToken(token, name) {
