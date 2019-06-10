@@ -12,9 +12,9 @@
     "build": "babel ./src --out-dir dist",
     "prod": "npm-run-all clean build server:prod",
     "electron": "electron .",
-    "build-electron": "electron-packager . --overwrite",
-    "build-electron-win": "electron-packager . --overwrite --platform=win32",
-    "build-electron-mac": "electron-packager . --overwrite --platform=darwin",
+    "build-electron": "rm dist/private_key; electron-packager . --overwrite",
+    "build-electron-win": "rm dist/private_key; electron-packager . --overwrite --platform=win32",
+    "build-electron-mac": "rm dist/private_key; electron-packager . --overwrite --platform=darwin",
     "watch": "nodemon"
   },
   "dependencies": {
