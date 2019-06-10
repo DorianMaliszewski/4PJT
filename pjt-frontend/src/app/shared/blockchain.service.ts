@@ -44,7 +44,7 @@ export class BlockchainService {
   }
 
   getBlockchain() {
-    this.getResource('/api/blocks')
+    this.getResource('/blocks')
       .toPromise()
       .then(
         response => {
@@ -58,13 +58,13 @@ export class BlockchainService {
   }
 
   getPeers() {
-    this.getResource('/api/peers')
+    this.getResource('/peers')
       .toPromise()
       .then(
         response => {
           let el = 0;
           for (let i = 0; i < response.length; i++) {
-            let node = new Peer(response[i], response[i]);
+            const node = new Peer(response[i], response[i]);
             // tslint:disable-next-line: no-unused-expression
             if (!this.verifDoubleNode(node)) {
               this.peers.push(node);
@@ -73,7 +73,12 @@ export class BlockchainService {
             }
             if (el === 0) {
               console.log(i);
-              let link = new Link(this.getRandomId(), response[i], response[i + 1], 'custom label');
+              const link = new Link(
+                this.getRandomId(),
+                response[i],
+                response[i + 1],
+                'custom label'
+              );
               this.links.push(link);
 
               this.emitLinksSubject();
@@ -109,7 +114,7 @@ export class BlockchainService {
   }
 
   getBalance() {
-    this.getResource('/api/balance').subscribe(
+    this.getResource('/balance').subscribe(
       response => {
         console.log('balance : ' + response);
       },
