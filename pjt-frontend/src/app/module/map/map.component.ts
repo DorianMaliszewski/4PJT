@@ -23,13 +23,13 @@ export class MapComponent implements OnInit {
   constructor(private mapService: MapService, private blockchainService: BlockchainService) {}
 
   ngOnInit() {
-    this.peerSubscription = this.blockchainService.peersSubject.subscribe((peers: [string]) => {
+    this.peerSubscription = this.blockchainService.peersSubject.subscribe((peers: [any]) => {
       peers.forEach(peer => {
         let ip = '';
-        if (peer.startsWith('::ffff:')) {
-          ip = peer.split(':')[3];
+        if (peer.id.startsWith('::ffff:')) {
+          ip = peer.id.split(':')[3];
         } else {
-          ip = peer.split(':')[0];
+          ip = peer.id.split(':')[0];
         }
         this.mapService.getCoords(ip).then(coord => {
           if (coord) {
