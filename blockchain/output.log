@@ -243,3 +243,17 @@ Received message: {"type":4,"data":"[]"}
 Received message: {"type":4,"data":"[]"}
 Error: ENOENT: no such file or directory, stat '/srv/4PJT/blockchain/dist/build/index.html'
 Error: ENOENT: no such file or directory, stat '/srv/4PJT/blockchain/dist/build/index.html'
+connection failed to peer: ws://dorianmaliszewski.fr:6001
+Received message: {"type":0,"data":null}
+Received message: {"type":2,"data":"[{\"index\":0,\"previousHash\":\"\",\"timestamp\":0,\"data\":[{\"txIns\":[{\"signature\":\"\",\"txOutId\":\"\",\"txOutIndex\":0}],\"txOuts\":[{\"address\":\"04bfcab8722991ae774db48f934ca79cfb7dd991229153b9f732ba5334aafcd8e7266e47076996b55a14bf9913ee3145ce0cfc1372ada8ada74bd287450313534a\",\"amount\":10}],\"id\":\"43c0a424fb738ed2f64b3758fa0f5eb52b753d579d2d2d2764ef7df815ddd66d\"}],\"hash\":\"91a73664bc84c0baa1fc75ea6e4aa6d1d20c5df664c724e3159aefc2e1186627\",\"difficulty\":0,\"nonce\":0}]"}
+received blockchain is not longer than received blockchain. Do nothing
+Received message: {"type":1,"data":null}
+Received message: {"type":3,"data":null}
+Received message: {"type":3,"data":null}
+Received message: {"type":4,"data":"[]"}
+Received message: {"type":4,"data":"[]"}
+Received message: {"type":2,"data":"[{\"index\":198,\"previousHash\":\"000056a69be84570264bc82bda6d1c0a2464940be7afd90e74d5e8e89b29f441\",\"timestamp\":1559916978,\"data\":[{\"id\":\"a3bd9dfd6541de7ee6cb4a4be3b955a6bb52dc2645bd52bc32b6131e091fe0f7\",\"txIns\":[{\"txOutId\":\"\",\"txOutIndex\":198,\"signature\":\"\"}],\"txOuts\":[{\"address\":\"0448681662cccdda3d05db63e6ec87774e4a064d06b8e2ce7902347bf0b944df7cdb392780415dd322c2fca7a17cf6787a0a2f3add8c827e440edbcfc325177101\",\"amount\":10}]}],\"hash\":\"00006f6852c42db7f2ab6a3142417a6cb17289410025fefaaa485f5898b1b140\",\"difficulty\":16,\"nonce\":21449}]"}
+received blockchain is not longer than received blockchain. Do nothing
+Received message: {"type":3,"data":null}
+Received message: {"type":4,"data":"[]"}
+connection failed to peer: undefined
