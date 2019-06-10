@@ -39,31 +39,18 @@
     </div>
     <div id="divHome" class="col">
       <h4>Représentation interactive des noeuds</h4>
-      <ngx-graph
-        layout="colaForceDirected"
-        [links]="links"
-        [nodes]="peers"
-        [clusters]="[
+      <ngx-graph layout="colaForceDirected" [links]="links" [nodes]="peers" [clusters]="[
           {
             id: 'third',
             label: 'Serveur redondant',
-            childNodeIds: ['127.0.0.1:6001']
+            childNodeIds: ['51.75.143.85:6001']
           }
-        ]"
-      >
+        ]">
         <ng-template #nodeTemplate let-node>
           <svg:g class="node" ngx-tooltip>
-            <svg:rect
-              (click)="test(node)"
-              [attr.width]="node.dimension.width"
-              [attr.height]="node.dimension.height"
-              [attr.fill]="node.data.color"
-            />
-            <svg:text
-              alignment-baseline="central"
-              [attr.x]="10"
-              [attr.y]="node.dimension.height / 2"
-            >
+            <svg:rect (click)="test(node)" [attr.width]="node.dimension.width" [attr.height]="node.dimension.height"
+              [attr.fill]="node.data.color" />
+            <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.dimension.height / 2">
               {{ peers.label }}
             </svg:text>
           </svg:g>
@@ -73,12 +60,8 @@
   </div>
 </div>
 
-<mat-horizontal-stepper
-  labelPosition="bottom"
-  style="text-align: center;    margin: 5%;
-  background-color: gainsboro;"
-  #stepper
->
+<mat-horizontal-stepper labelPosition="bottom" style="text-align: center;    margin: 5%;
+  background-color: gainsboro;" #stepper>
   <mat-step [stepControl]="blockFormGroup">
     <ng-template matStepLabel>Tous les blocks</ng-template>
     <app-block></app-block>
