@@ -17,6 +17,9 @@ export class MapComponent implements OnInit {
   peerSubscription: Subscription;
   peers = [];
 
+  lat: number = 45.74846;
+  lng: number = 4.84671;
+
   constructor(private mapService: MapService, private blockchainService: BlockchainService) {}
 
   ngOnInit() {
